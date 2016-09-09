@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="test">loading...</div>
+
+  <script src="libs/jquery/dist/jquery.js"></script>
+  <script src="libs/underscore/underscore.js"></script>
+  <script src="libs/backbone/backbone.js"></script>
+
+  <script>
+  var Item = Backbone.Model.extend({
+    default: {
+      text: 'default'
+    }
+  })
+  var Items = Backbone.Collection.extend({
+    model: Item
+  })
+  var items = new Items([{text:'one'},{text:'two'},{text:'three'}])
+
+  var View = Backbone.View.extend({
+    el: '#test',
+    initialize: function(){
+      this.render()
+    },
+    render: function(){
+      this.$el.html('testing')
+      return this
+    }
+  })
+
+  var view = new View();
+  </script>
+</body>
+</html>
