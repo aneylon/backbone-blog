@@ -1,38 +1,56 @@
-console.log('test')
+// console.log('test')
+var fbURL = 'https://flickering-torch-4028.firebaseio.com'
+// var fireBaseRef = new Firebase('https://flickering-torch-4028.firebaseio.com')
 
-var fireBaseRef = new Firebase('https://flickering-torch-4028.firebaseio.com')
-
-var myFunc = function(){
-  var nameField = document.getElementById('inputName')
-  var numberField = document.getElementById('inputNumber')
-  var name = nameField.value
-  var number = numberField.value
+var AddPost = function(){
+  var fbRef = new Firebase(fbURL + '/posts')
+  var titleField = document.getElementById('inputTitle')
+  var dateField = document.getElementById('inputDate')
+  var contentField = document.getElementById('inputContent')
+  var imagesField = document.getElementById('inputImages')
 
   var newThing = {
-    name: name,
-    number: number
+    title: titleField.value,
+    date: dateField.value,
+    content: contentField.value,
+    images: imagesField.value
   }
+  // fbRef.child(name).set(newThing)
+  fbRef.push(newThing)
 
-  fireBaseRef.push(newThing)
-
-  console.log('name:',name,'number:',number)
-  nameField.value = ''
-  numberField.value = ''
+  console.log(newThing)
+  titleField.value = ''
+  dateField.value = ''
+  contentField.value = ''
+  imagesField.value = ''
 }
 
-var Item = Backbone.Model.extend({
+var Post = Backbone.Model.extend({
   defaults: {
-    text: 'default'
+    title: '',
+    date: '',
+    images: [],
+    content: ''
   }
 })
 
-var Items = Backbone.Collection.extend({
-  model: Item
+var Posts = Backbone.Firebase.Collection.extend({
+  url: fbURL + '/posts',
+  model: Post
 })
 
-var ItemView = Backbone.View.extend({
-  template: _.template('<li><%= text %></li>'),
-  initialize: function(){
+var posts = new Posts()
+
+var postTemplate = '<div>'+
+'<div><%= title %></div>' +
+'<div><%= date %></div>' +
+'<div><%= images %></div>' +
+'<div><%= content %></div>' +
+'</div>'
+
+var PostView = Backbone.View.extend({
+  template: _.template(postTemplate),
+  initilize: function(){
     this.render()
   },
   render: function(){
@@ -41,20 +59,23 @@ var ItemView = Backbone.View.extend({
   }
 })
 
-var ItemsView = Backbone.View.extend({
-  el:'#test',
-  initialize: function(){
+var PostsView = Backbone.View.extend({
+  el: '#posts',
+  initilize: function(){
     this.render()
   },
   render: function(){
+    this.$el.html('')
     this.collection.forEach(function(item){
-      var itemView = new ItemView({ model: item })
-      this.$el.append(itemView.render().$el)
+      var postView = new PostView({ model: item })
+      this.$el.append(postView.render().$el)
     }, this)
     return this
   }
 })
 
-var items  = new Items([{text:'one'},{text:'two'},{text:'three'},{}])
-
-var itemsView = new ItemsView({collection: items})
+var postsView = new PostsView({ collection: posts })
+setTimeout(function(){
+  postsView.render()
+  console.log('test')
+},500)
