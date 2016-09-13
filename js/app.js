@@ -16,13 +16,55 @@ var AddPost = function(){
     images: imagesField.value
   }
   // fbRef.child(name).set(newThing)
-  fbRef.push(newThing)
+
+  var authData = getAuth()
+  console.log(authData)
+  if(authData){
+    fbRef.push(newThing, function(err){ if(err) console.log('error adding:', err)})
+  }
+
 
   console.log(newThing)
   titleField.value = ''
   dateField.value = ''
   contentField.value = ''
   imagesField.value = ''
+}
+
+var SignUp = function(){
+  var fbRef = new Firebase(fbURL)
+  fbRef.createUser({
+    email: document.getElementById('signUpEmail').value,
+    password: document.getElementById('signUpPw').value
+  }, function(error, data){
+    if(error) {
+      console.log('error adding user:', error)
+    } else {
+      // console.log('created user with uid:', data.uid)
+      console.dir(data)
+      // window.LocalStorage.setItem('bbb', data) ? or call Login ?
+    }
+  })
+}
+
+var Login = function(email,pw){
+  var fbRef = new Firebase(fbURL)
+  fbRef.authWithPassword({
+    email: document.getElementById('signUpEmail').value,
+    password: document.getElementById('signUpPw').value
+  }, function(error, data){
+    if(error){
+      console.log('login failed:', error)
+    } else {
+      console.log('logged in:', data)
+      // store data ?
+    }
+  })
+}
+// change fb write rule to "auth.uid === 'admin'" or equivalent
+var Logout = function(){
+  var fbRef = new Firebase(fbURL)
+  fbRef.unauth();
 }
 
 var Post = Backbone.Model.extend({
