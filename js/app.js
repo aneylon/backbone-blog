@@ -17,7 +17,7 @@ var AddPost = function(){
   }
   // fbRef.child(name).set(newThing)
 
-  var authData = getAuth()
+  var authData = fbRef.getAuth()
   console.log(authData)
   if(authData){
     fbRef.push(newThing, function(err){ if(err) console.log('error adding:', err)})
@@ -40,18 +40,17 @@ var SignUp = function(){
     if(error) {
       console.log('error adding user:', error)
     } else {
-      // console.log('created user with uid:', data.uid)
       console.dir(data)
-      // window.LocalStorage.setItem('bbb', data) ? or call Login ?
+      Login();
     }
   })
 }
 
-var Login = function(email,pw){
+var Login = function(){
   var fbRef = new Firebase(fbURL)
   fbRef.authWithPassword({
-    email: document.getElementById('signUpEmail').value,
-    password: document.getElementById('signUpPw').value
+    email: document.getElementById('loginEmail').value,
+    password: document.getElementById('loginPw').value
   }, function(error, data){
     if(error){
       console.log('login failed:', error)
@@ -59,6 +58,15 @@ var Login = function(email,pw){
       console.log('logged in:', data)
       // store data ?
     }
+  })
+}
+
+var ChangePw = function(){
+  var fbRef = new Firebase(fbURL)
+  fbRef.changePassword({
+    email: document.getElementById('changeEmail').value,
+    oldPassword: document.getElementById('changeOldPw').value,
+    newPassword: document.getElementById('changeNewPw').value
   })
 }
 // change fb write rule to "auth.uid === 'admin'" or equivalent
@@ -108,10 +116,15 @@ var PostsView = Backbone.View.extend({
   },
   render: function(){
     this.$el.html('')
-    this.collection.forEach(function(item){
+    this.collection.forEach(function(item,i){
       var postView = new PostView({ model: item })
       this.$el.append(postView.render().$el)
+      console.log(i)
     }, this)
+    setTimeout(function(){
+      console.log('done')
+      // highlight js processing
+    },500)
     return this
   }
 })
@@ -119,5 +132,6 @@ var PostsView = Backbone.View.extend({
 var postsView = new PostsView({ collection: posts })
 setTimeout(function(){
   postsView.render()
-  console.log('test')
+  // better way to do this?
+  // console.log('test')
 },500)

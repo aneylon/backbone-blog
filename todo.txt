@@ -1,3 +1,9 @@
 https://www.firebase.com/docs/web/libraries/backbone/quickstart.html
 
 rollup.js - tree shaking
+
+ES6 ?
+
+Foundation / Bootstrap
+
+Highlight JS
