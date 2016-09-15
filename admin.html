@@ -8,36 +8,53 @@
 </head>
 <body>
 
-  <h2>Signup</h2>
-  <form>
-    <input type="email" placeholder="email" id="signUpEmail">
-    <input type="password" placeholder="password" id="signUpPw">
-    <input type="button" onClick="SignUp()" value="SignUp">
-  </form>
+  <div id="msgArea">
+    messages go here
+  </div>
 
-  <h2>Login</h2>
-  <form>
-    <input type="email" placeholder="email" id="loginEmail">
-    <input type="password" placeholder="password" id="loginPw">
-    <input type="button" onClick="Login()" value="Login">
-  </form>
+  <div id="logOutSection" class="hideOnStart">
+    <input type="button" onClick="Logout()" value="Logout">
+  </div>
 
-  <h2>Change Password</h2>
-  <form>
-    <input type="email" placeholder="email" id="changeEmail">
-    <input type="password" placeholder="old password" id="changeOldPw">
-    <input type="password" placeholder="new password" id="changeNewPw">
-    <input type="button" onClick="ChangePw()" value="Login">
-  </form>
+  <div id="signUpSection">
+    <h2 id="signUpTitle">Signup</h2>
+    <form id="signUpForm">
+      <input type="email" placeholder="email" id="signUpEmail">
+      <input type="password" placeholder="password" id="signUpPw">
+      <input type="button" onClick="SignUp()" value="SignUp">
+    </form>
+  </div>
 
-  <<h2>Add Post</h2>
-  <form>
-    <input type="text" placeholder="Title" id="inputTitle">
-    <input type="text" placeholder="Date" id="inputDate">
-    <input type="text" placeholder="Content" id="inputContent">
-    <input type="text" placeholder="Images" id="inputImages">
-    <input type="button" onClick="AddPost()" value="Submit">
-  </form>
+  <div id="loginSection">
+    <h2 id="loginTitle">Login</h2>
+    <form id="loginForm">
+      <input type="email" placeholder="email" id="loginEmail">
+      <input type="password" placeholder="password" id="loginPw">
+      <input type="button" onClick="Login()" value="Login">
+    </form>
+  </div>
+
+  <div id="addSection">
+    <h2 id="addTitle">Add Post</h2>
+    <form id="addForm">
+      <input type="text" placeholder="Title" id="inputTitle">
+      <input type="text" placeholder="Date" id="inputDate">
+      <input type="text" placeholder="Content" id="inputContent">
+      <input type="text" placeholder="Images" id="inputImages">
+      <input type="text" placeholder="Tags" id="inputTags">
+      <input type="button" onClick="AddPost()" value="Submit">
+    </form>
+  </div>
+
+  <div id="changeSection">
+    <h2 id="changeTitle" class="toggle">Change Password</h2>
+    <form id="changeForm" class="hideOnStart">
+      <input type="email" placeholder="email" id="changeEmail">
+      <input type="password" placeholder="old password" id="changeOldPw">
+      <input type="password" placeholder="new password" id="changeNewPw">
+      <input type="button" onClick="ChangePw()" value="Login">
+    </form>
+  </div>
 
   <script src="libs/jquery/dist/jquery.min.js"></script>
   <script src="libs/underscore/underscore-min.js"></script>

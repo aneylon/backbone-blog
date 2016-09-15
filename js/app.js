@@ -1,6 +1,19 @@
-// console.log('test')
 var fbURL = 'https://flickering-torch-4028.firebaseio.com'
 // var fireBaseRef = new Firebase('https://flickering-torch-4028.firebaseio.com')
+
+$(function(){
+  $('body').on('click', '.toggle', function(){
+    $(this).parent().children('.hideOnStart').slideToggle('fast')
+  })
+})
+
+var hideElement = function(elId, speed, after){
+  $(elId).slideUp(speed, after)
+}
+
+var showElement = function(elId, speed, after){
+  $(elId).slideDown(speed, after)
+}
 
 var AddPost = function(){
   var fbRef = new Firebase(fbURL + '/posts')
@@ -8,12 +21,14 @@ var AddPost = function(){
   var dateField = document.getElementById('inputDate')
   var contentField = document.getElementById('inputContent')
   var imagesField = document.getElementById('inputImages')
+  var tagsField = document.getElementById('inputTags')
 
   var newThing = {
     title: titleField.value,
     date: dateField.value,
     content: contentField.value,
-    images: imagesField.value
+    images: imagesField.value,
+    tags: tagsField.value.split(',').map(function(tag){return tag.trimLeft()})
   }
   // fbRef.child(name).set(newThing)
 
@@ -23,12 +38,12 @@ var AddPost = function(){
     fbRef.push(newThing, function(err){ if(err) console.log('error adding:', err)})
   }
 
-
   console.log(newThing)
   titleField.value = ''
   dateField.value = ''
   contentField.value = ''
   imagesField.value = ''
+  tagsField.value = ''
 }
 
 var SignUp = function(){
@@ -48,39 +63,61 @@ var SignUp = function(){
 
 var Login = function(){
   var fbRef = new Firebase(fbURL)
+  var emailField = document.getElementById('loginEmail')
+  var pwField = document.getElementById('loginPw')
   fbRef.authWithPassword({
-    email: document.getElementById('loginEmail').value,
-    password: document.getElementById('loginPw').value
+    email: emailField.value,
+    password: pwField.value
   }, function(error, data){
     if(error){
       console.log('login failed:', error)
     } else {
       console.log('logged in:', data)
       // store data ?
+      // clear info
+      emailField.value = ''
+      pwField.value = ''
+      hideElement('#loginSection', 'fast', ()=>{console.log('loggged in')})
+      hideElement('#signUpSection', 'fast', ()=>{console.log('loggged in')})
+      showElement('#logOutSection', 'fast', ()=>{console.log('loggged in')})
     }
   })
 }
 
 var ChangePw = function(){
   var fbRef = new Firebase(fbURL)
+  var changeEmail = document.getElementById('changeEmail')
+  var changeOldPw = document.getElementById('changeOldPw')
+  var changeNewPw = document.getElementById('changeNewPw')
   fbRef.changePassword({
-    email: document.getElementById('changeEmail').value,
-    oldPassword: document.getElementById('changeOldPw').value,
-    newPassword: document.getElementById('changeNewPw').value
+    email: changeEmail.value,
+    oldPassword: changeOldPw.value,
+    newPassword: changeNewPw.value
+  },function(err){
+    if(err) console.log('Password change error:', err)
+    else {
+        changeEmail.value = ''
+        changeOldPw.value = ''
+        changeNewPw.value = ''
+    }
   })
 }
 // change fb write rule to "auth.uid === 'admin'" or equivalent
 var Logout = function(){
   var fbRef = new Firebase(fbURL)
   fbRef.unauth();
+  // ui changes
 }
+
+// backbone things move to other file? or move admin functions to other file?
 
 var Post = Backbone.Model.extend({
   defaults: {
     title: '',
     date: '',
     images: [],
-    content: ''
+    content: '',
+    tags: ''
   }
 })
 
@@ -96,6 +133,7 @@ var postTemplate = '<div>'+
 '<div><%= date %></div>' +
 '<div><%= images %></div>' +
 '<div><%= content %></div>' +
+'<div><%= tags %></div>' +
 '</div>'
 
 var PostView = Backbone.View.extend({
