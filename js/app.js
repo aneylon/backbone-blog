@@ -110,6 +110,46 @@ var Logout = function(){
 }
 
 // backbone things move to other file? or move admin functions to other file?
+var Link = Backbone.Model.extend({
+  defaults: {
+    url: '',
+    text: ''
+  }
+})
+
+var Links = Backbone.Collection.extend({
+    model: Link
+})
+
+var LinkView = Backbone.View.extend({
+  template: _.template('<li><a href="<%= url %>"><%= text %></li>'),
+  initilize: function(){
+    this.render()
+  },
+  render: function(){
+    this.$el.html(this.template(this.model.attributes))
+    return this
+  }
+})
+
+var LinksView = Backbone.View.extend({
+  el: '#navLinks',
+  initilize: function(){
+    this.render()
+  },
+  render: function(){
+    this.$el.html('')
+    this.collection.forEach(function(link){
+      var linkView = new LinkView({ model: link })
+      this.$el.append(linkView.render().$el)
+    }, this)
+    return this
+  }
+})
+
+var links = new Links([{text:'1', url:'one'},{text:'2', url:'two'},{text:'three', url:'3'},{text:'four', url:'4'}])
+var linksView = new LinksView({collection: links})
+linksView.render()
 
 var Post = Backbone.Model.extend({
   defaults: {
@@ -128,13 +168,14 @@ var Posts = Backbone.Firebase.Collection.extend({
 
 var posts = new Posts()
 
-var postTemplate = '<div>'+
+var postTemplate = '<div class="media-object">'+
+'<div class="media-object-section"><div class="thumbnail"><img src="" alt="<%= images %>"/></div></div>' +
+'<div class="media-object-section">' +
 '<div><%= title %></div>' +
 '<div><%= date %></div>' +
-'<div><%= images %></div>' +
 '<div><%= content %></div>' +
 '<div><%= tags %></div>' +
-'</div>'
+'</div></div>'
 
 var PostView = Backbone.View.extend({
   template: _.template(postTemplate),
