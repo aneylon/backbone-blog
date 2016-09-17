@@ -1,7 +1,22 @@
 var fbURL = 'https://flickering-torch-4028.firebaseio.com'
+var blogName = 'myBackBoneBlog'
+var token
 // var fireBaseRef = new Firebase('https://flickering-torch-4028.firebaseio.com')
 
 $(function(){
+  token = window.localStorage.getItem(blogName)
+  if(token){
+    var fbRef = new Firebase(fbURL)
+    fbRef.authWithCustomToken(token, function(err, authData){
+      if(err) console.log('error', err)
+      else{
+        showLoginView()
+      }
+    })
+  } else {
+    showLogoutView()
+  }
+
   $('body').on('click', '.toggle', function(){
     $(this).parent().children('form').slideToggle('fast')
   })
@@ -13,6 +28,20 @@ var hideElement = function(elId, speed, after){
 
 var showElement = function(elId, speed, after){
   $(elId).slideDown(speed, after)
+}
+
+var showLoginView = function(){
+  hideElement('#loginSection', 'fast', ()=>{})
+  hideElement('#signUpSection', 'fast', ()=>{})
+  showElement('#logOutSection', 'fast', ()=>{})
+  showElement('#addSection', 'fast', ()=>{})
+}
+
+var showLogoutView = function(){
+  hideElement('#addSection', 'fast', ()=>{})
+  hideElement('#logOutSection', 'fast', ()=>{})
+  showElement('#signUpSection', 'fast', ()=>{})
+  showElement('#loginSection', 'fast', ()=>{})
 }
 
 var AddPost = function(){
@@ -31,14 +60,11 @@ var AddPost = function(){
     tags: tagsField.value.split(',').map(function(tag){return tag.trimLeft()})
   }
   // fbRef.child(name).set(newThing)
-
   var authData = fbRef.getAuth()
-  console.log(authData)
   if(authData){
     fbRef.push(newThing, function(err){ if(err) console.log('error adding:', err)})
   }
 
-  console.log(newThing)
   titleField.value = ''
   dateField.value = ''
   contentField.value = ''
@@ -55,8 +81,7 @@ var SignUp = function(){
     if(error) {
       console.log('error adding user:', error)
     } else {
-      console.dir(data)
-      Login();
+      Login()
     }
   })
 }
@@ -72,15 +97,10 @@ var Login = function(){
     if(error){
       console.log('login failed:', error)
     } else {
-      console.log('logged in:', data)
-      // store data ?
-      // clear info
+      window.localStorage.setItem(blogName, data.token)
       emailField.value = ''
       pwField.value = ''
-      hideElement('#loginSection', 'fast', ()=>{console.log('loggged in')})
-      hideElement('#signUpSection', 'fast', ()=>{console.log('loggged in')})
-      showElement('#logOutSection', 'fast', ()=>{console.log('loggged in')})
-      showElement('#addSection', 'fast', ()=>{console.log('logged in')})
+      showLoginView()
     }
   })
 }
@@ -100,19 +120,16 @@ var ChangePw = function(){
         changeEmail.value = ''
         changeOldPw.value = ''
         changeNewPw.value = ''
-        hideElement('#changeForm', 'fast', ()=>{console.log('changed password')})
+        hideElement('#changeForm', 'fast', ()=>{})
     }
   })
 }
-// change fb write rule to "auth.uid === 'admin'" or equivalent
+
 var Logout = function(){
   var fbRef = new Firebase(fbURL)
-  fbRef.unauth();
-  // ui changes
-  hideElement('#addSection', 'fast', ()=>{console.log('loggged in')})
-  hideElement('#logOutSection', 'fast', ()=>{console.log('loggged in')})
-  showElement('#signUpSection', 'fast', ()=>{console.log('loggged in')})
-  showElement('#loginSection', 'fast', ()=>{console.log('loggged in')})
+  fbRef.unauth()
+  window.localStorage.removeItem(blogName)
+  showLogoutView()
 }
 
 // backbone things move to other file? or move admin functions to other file?
@@ -203,13 +220,12 @@ var PostsView = Backbone.View.extend({
   },
   render: function(){
     this.$el.html('')
-    this.collection.forEach(function(item,i){
+    this.collection.forEach(function(item){
       var postView = new PostView({ model: item })
       this.$el.append(postView.render().$el)
-      console.log(i)
     }, this)
     setTimeout(function(){
-      console.log('done')
+      // console.log('done')
       // highlight js processing
     },500)
     return this
