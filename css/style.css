@@ -5,6 +5,38 @@
   margin: 0px;
 }
 
+.input-group {
+  border: solid grey 1px;
+  background-color: lightgrey;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.input-group.title {
+  background-color: dimgrey;
+  color: white;
+}
+
+.input-group.form {
+  background-color: darkgrey;
+  color: white;
+}
+
+.input-group.form input {
+  padding: 5px;
+  margin: 5px;
+  width: 250px;
+  display: block;
+}
+
+.input-group.form textarea {
+  padding: 5px;
+  margin: 5px;
+  width: 250px;
+  height: 100px;
+}
+
 .hideOnStart {
   display: none;
 }

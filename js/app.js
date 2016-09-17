@@ -3,7 +3,7 @@ var fbURL = 'https://flickering-torch-4028.firebaseio.com'
 
 $(function(){
   $('body').on('click', '.toggle', function(){
-    $(this).parent().children('.hideOnStart').slideToggle('fast')
+    $(this).parent().children('form').slideToggle('fast')
   })
 })
 
