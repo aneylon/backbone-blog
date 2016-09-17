@@ -122,7 +122,9 @@ var Links = Backbone.Collection.extend({
 })
 
 var LinkView = Backbone.View.extend({
-  template: _.template('<li><a href="<%= url %>"><%= text %></li>'),
+  tagName: 'li',
+  // className: 'button grey',
+  template: _.template('<a href="<%= url %>" class="button grey"><%= text %>'),
   initilize: function(){
     this.render()
   },
@@ -147,7 +149,7 @@ var LinksView = Backbone.View.extend({
   }
 })
 
-var links = new Links([{text:'1', url:'one'},{text:'2', url:'two'},{text:'three', url:'3'},{text:'four', url:'4'}])
+var links = new Links([{text:'home', url:'/'},{text:'projects', url:'projects'},{text:'images', url:'images'},{text:'about', url:'about'},{text:'contact', url:'contact'}])
 var linksView = new LinksView({collection: links})
 linksView.render()
 
