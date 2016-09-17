@@ -80,6 +80,7 @@ var Login = function(){
       hideElement('#loginSection', 'fast', ()=>{console.log('loggged in')})
       hideElement('#signUpSection', 'fast', ()=>{console.log('loggged in')})
       showElement('#logOutSection', 'fast', ()=>{console.log('loggged in')})
+      showElement('#addSection', 'fast', ()=>{console.log('logged in')})
     }
   })
 }
@@ -99,6 +100,7 @@ var ChangePw = function(){
         changeEmail.value = ''
         changeOldPw.value = ''
         changeNewPw.value = ''
+        hideElement('#changeForm', 'fast', ()=>{console.log('changed password')})
     }
   })
 }
@@ -107,6 +109,10 @@ var Logout = function(){
   var fbRef = new Firebase(fbURL)
   fbRef.unauth();
   // ui changes
+  hideElement('#addSection', 'fast', ()=>{console.log('loggged in')})
+  hideElement('#logOutSection', 'fast', ()=>{console.log('loggged in')})
+  showElement('#signUpSection', 'fast', ()=>{console.log('loggged in')})
+  showElement('#loginSection', 'fast', ()=>{console.log('loggged in')})
 }
 
 // backbone things move to other file? or move admin functions to other file?
