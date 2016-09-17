@@ -1,7 +1,40 @@
 * {
-  border: solid green 1px;
+  /*border: solid green 1px;*/
+  font-family: sans-serif;
+  padding: 0px;
+  margin: 0px;
 }
 
 .hideOnStart {
   display: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.menu li {
+  display: inline-block;
+}
+
+.button {
+  padding: 5px;
+  margin: 1px;
+  width: 75px;
+  border-radius: 2px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.grey {
+  background-color: darkgrey;
+  color: black;
+}
+.grey:hover {
+  background-color: lightgrey;
+  color: white;
+}
+
+a {
+  color: black;
 }
