@@ -11,30 +11,36 @@
   <script src="libs/jquery/dist/jquery.js"></script>
   <script src="libs/underscore/underscore.js"></script>
   <script src="libs/backbone/backbone.js"></script>
+  <script src="libs/markdown/lib/markdown.js"></script>
 
   <script>
-  var Item = Backbone.Model.extend({
-    default: {
-      text: 'default'
-    }
-  })
-  var Items = Backbone.Collection.extend({
-    model: Item
-  })
-  var items = new Items([{text:'one'},{text:'two'},{text:'three'}])
 
-  var View = Backbone.View.extend({
-    el: '#test',
-    initialize: function(){
-      this.render()
-    },
-    render: function(){
-      this.$el.html('testing')
-      return this
-    }
-  })
+  var test = '**hello** *markdown* _yolo_ __mofo__'
+  var test2 = markdown.toHTML(test)
+  console.log(test2)
 
-  var view = new View();
+  // var Item = Backbone.Model.extend({
+  //   default: {
+  //     text: 'default'
+  //   }
+  // })
+  // var Items = Backbone.Collection.extend({
+  //   model: Item
+  // })
+  // var items = new Items([{text:'one'},{text:'two'},{text:'three'}])
+  //
+  // var View = Backbone.View.extend({
+  //   el: '#test',
+  //   initialize: function(){
+  //     this.render()
+  //   },
+  //   render: function(){
+  //     this.$el.html('testing')
+  //     return this
+  //   }
+  // })
+  //
+  // var view = new View();
   </script>
 </body>
 </html>

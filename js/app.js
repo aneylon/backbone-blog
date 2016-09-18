@@ -69,7 +69,7 @@ var AddPost = function(){
   var newThing = {
     title: titleField.value,
     date: dateField.value,
-    content: contentField.value,
+    content: markdown.toHTML(contentField.value),
     images: imagesField.value,
     tags: tagsField.value.split(',').map(function(tag){return tag.trimLeft()})
   }
