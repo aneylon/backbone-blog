@@ -1,8 +1,83 @@
 * {
   /*border: solid green 1px;*/
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
   padding: 0px;
   margin: 0px;
+}
+
+body {
+  background-color: #6C9F23;
+}
+
+#header {
+  background-color: #333;
+  color: white;
+}
+
+.header-titles {
+  padding: 15px
+}
+
+#posts {
+  margin: 10px auto 65px;
+  max-width: 750px;
+  padding: 10px;
+  background-color: dimgrey;
+}
+
+.post {
+  padding: 15px;
+  margin: 10px;
+  margin-bottom: 20px;
+  background-color: darkgrey;
+  color: black;
+  border: solid black 1px;
+  overflow: auto;
+}
+
+.post-img {
+  height: 100px;
+  float: left;
+  border: black solid 3px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.post-title {
+  font-size: xx-large;
+  display: inline-block;
+}
+
+.post-date {
+  font-size: large;
+  display: inline-block;
+  float: right;
+  color: dimgrey;
+}
+
+.post-content {
+
+}
+
+.post-tags {
+  clear: both;
+  background-color: lightgrey;
+  color: black;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+footer {
+  font-size: small;
+  background-color: black;
+  color: dimgrey;
+  padding: 15px;
+  width: 100%;
+  height: 15px;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
 }
 
 .input-group {
@@ -44,7 +119,10 @@
 .text-center {
   text-align: center;
 }
-
+.menu {
+  padding: 15px 0px;
+  background-color: black;
+}
 .menu li {
   display: inline-block;
 }
@@ -69,4 +147,18 @@
 
 a {
   color: black;
+}
+
+.loading-img {
+  height: 64px;
+  width: 64px;
+  margin: auto;
+}
+
+.loading-text {
+  margin: 5px; auto;
+  padding: 15px;
+  text-align: center;
+  font-size: xx-large;
+  color: white;
 }

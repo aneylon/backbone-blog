@@ -1,9 +1,11 @@
 var fbURL = 'https://flickering-torch-4028.firebaseio.com'
 var blogName = 'myBackBoneBlog'
 var token
+var date
 // var fireBaseRef = new Firebase('https://flickering-torch-4028.firebaseio.com')
 
 $(function(){
+  setDate()
   token = window.localStorage.getItem(blogName)
   if(token){
     var fbRef = new Firebase(fbURL)
@@ -20,7 +22,19 @@ $(function(){
   $('body').on('click', '.toggle', function(){
     $(this).parent().children('form').slideToggle('fast')
   })
+
+  $('body').on('click', '.post-img', function(){
+    // $(this).
+    console.log('clicked img')
+    // display modal for img
+  })
 })
+
+var setDate = function(){
+  date = new Date() // date.getDate()(day) .getFullYear() .getMonth()(+1)
+  date = date.getMonth()+1 + '-' + date.getDate() + '-' + date.getFullYear()
+  $('#inputDate').val(date)
+}
 
 var hideElement = function(elId, speed, after){
   $(elId).slideUp(speed, after)
@@ -70,6 +84,7 @@ var AddPost = function(){
   contentField.value = ''
   imagesField.value = ''
   tagsField.value = ''
+  setDate()
 }
 
 var SignUp = function(){
@@ -193,14 +208,13 @@ var Posts = Backbone.Firebase.Collection.extend({
 
 var posts = new Posts()
 
-var postTemplate = '<div class="media-object">'+
-'<div class="media-object-section"><div class="thumbnail"><img src="" alt="<%= images %>"/></div></div>' +
-'<div class="media-object-section">' +
-'<div><%= title %></div>' +
-'<div><%= date %></div>' +
-'<div><%= content %></div>' +
-'<div><%= tags %></div>' +
-'</div></div>'
+var postTemplate = '<div class="post">'+
+'<img src="<%- \'img/\'+ images %>" alt="<%= images %>" class="post-img"/>' +
+'<div class="post-title"><%= title %></div>' +
+'<div class="post-date"><%= date %></div>' +
+'<div class="post-content"><%= content %></div>' +
+'<div class="post-tags"><%= tags %></div>' +
+'</div>'
 
 var PostView = Backbone.View.extend({
   template: _.template(postTemplate),
@@ -220,7 +234,11 @@ var PostsView = Backbone.View.extend({
   },
   render: function(){
     this.$el.html('')
+    var rev = []
     this.collection.forEach(function(item){
+      rev.unshift(item)
+    })
+    rev.forEach(function(item){
       var postView = new PostView({ model: item })
       this.$el.append(postView.render().$el)
     }, this)
