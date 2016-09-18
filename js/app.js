@@ -69,7 +69,8 @@ var AddPost = function(){
   var newThing = {
     title: titleField.value,
     date: dateField.value,
-    content: markdown.toHTML(contentField.value),
+    // content: markdown.toHTML(contentField.value),
+    content: contentField.value,
     images: imagesField.value,
     tags: tagsField.value.split(',').map(function(tag){return tag.trimLeft()})
   }
@@ -243,9 +244,10 @@ var PostsView = Backbone.View.extend({
       this.$el.append(postView.render().$el)
     }, this)
     setTimeout(function(){
-      // console.log('done')
-      // highlight js processing
-    },500)
+      $('code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    },0)
     return this
   }
 })
@@ -253,6 +255,4 @@ var PostsView = Backbone.View.extend({
 var postsView = new PostsView({ collection: posts })
 setTimeout(function(){
   postsView.render()
-  // better way to do this?
-  // console.log('test')
 },500)
