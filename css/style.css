@@ -57,7 +57,7 @@ body {
 }
 
 .post-content {
-
+  /*border: solid black 1px;*/
 }
 
 .post-tags {
@@ -131,17 +131,18 @@ footer {
   padding: 5px;
   margin: 1px;
   width: 75px;
-  border-radius: 2px;
+  /*border-radius: 2px;*/
   display: inline-block;
   text-decoration: none;
 }
 
 .grey {
-  background-color: darkgrey;
+  background-color: lightgrey;
   color: black;
+  border-bottom: solid #6C9F23 2px;
 }
 .grey:hover {
-  background-color: lightgrey;
+  background-color: darkgrey;
   color: white;
 }
 
