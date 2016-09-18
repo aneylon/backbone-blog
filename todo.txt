@@ -1,9 +1,18 @@
 https://www.firebase.com/docs/web/libraries/backbone/quickstart.html
 
+Routes
+Fonts
+Input validation
+Tags - links
+
+minify
+uglify
 rollup.js - tree shaking
+? grunt / gulp
+
+
+
+x Highlight JS
+? markdown
 
 ES6 ?
-
-Foundation / Bootstrap
-
-Highlight JS
