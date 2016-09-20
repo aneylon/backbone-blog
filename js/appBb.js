@@ -1,10 +1,3 @@
-var HomeView = Backbone.View.extend({
-  render: function(){
-    this.$el.html('Home View')
-    return this
-  }
-})
-
 var ProjectsView = Backbone.View.extend({
   render: function(){
     this.$el.html('Projects View')
@@ -39,9 +32,7 @@ var Links = Backbone.Collection.extend({
 
 var LinkView = Backbone.View.extend({
   tagName: 'li',
-  // className: 'button grey',
   template: _.template('<a data-url="<%= url %>" class="button grey"><%= text %>'),
-  // template: _.template('<a href="<%= url %>" class="button grey"><%= text %>'),
   initilize: function(){
     this.render()
   },
@@ -113,10 +104,6 @@ var PostView = Backbone.View.extend({
 })
 
 var PostsView = Backbone.View.extend({
-  // el: '#posts',
-  // initilize: function(){
-  //   this.render()
-  // },
   render: function(){
     this.$el.html('')
     var rev = []
@@ -124,10 +111,10 @@ var PostsView = Backbone.View.extend({
       rev.unshift(item)
     })
     rev.forEach(function(item){
-      console.log(item)
       var postView = new PostView({ model: item })
       this.$el.append(postView.render().$el)
     }, this)
+    // event for 'onRender'?
     setTimeout(function(){
       $('code').each(function(i, block) {
         hljs.highlightBlock(block);
@@ -138,10 +125,6 @@ var PostsView = Backbone.View.extend({
 })
 
 var postsView = new PostsView({ collection: posts })
-setTimeout(function(){
-  // postsView.render()
-},500)
-
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -154,12 +137,9 @@ var Router = Backbone.Router.extend({
   },
   viewHome: function(){
     var posts = new Posts()
-    console.log(posts)
-    // this.loadView(new HomeView({ collection: posts}))
-    setTimeout(()=>{
-      console.log(posts)
+    posts.on('sync',(col)=>{
       this.loadView(new PostsView({ collection: posts}))
-    },1000)
+    })
   },
   viewProjects: function(){
     this.loadView(new ProjectsView())
