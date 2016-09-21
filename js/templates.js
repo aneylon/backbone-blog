@@ -1,20 +1,23 @@
 var aboutTemp = `
-<div class="post">
+<div class="about">
+  <img src="img/test1.png" />
   <h1>About me</h1>
-  <br/>
-  <p>I live and work in San Francisco</p>
-  <br/>
-  <p>I do computer stuff.</p>
-  <br/>
-  <p>I like languages and tromping throug the woods.</p>
-  <br/>
-  <p>And sometimes i <a href="/#images">scribble</a> in either 2 or 3d.</p>
-  <br/>
-  <p>You can follow me on <a href="http://twitter.com/ArlenNeylon">Twitter</a> if you like</p>
-  <br/>
+  <p>I live and work in San Francisco doing <a href="/#projects">computer stuff.</a></p>
+  <p>I like languages and tromping through the woods.</p>
+  <p>Sometimes I <a href="/#images">scribble</a> in either 2 or 3d.</p>
+  <p>You can follow me on <a href="http://twitter.com/ArlenNeylon">Twitter</a> if you like.</p>
   <p>Or contact me through <a href="http://linkedin.com/in/arlenneylon">LinkedIn.</a></p>
 </div>
 `
+
+var postTemplate = '<div class="post">'+
+'<div class="post-title"><%= title %></div>' +
+'<div class="post-date"><%= date %></div>' +
+'<div class="spacer"></div>' +
+'<img src="<%- \'img/\'+ images %>" alt="<%= images %>" class="post-img"/>' +
+'<div class="post-content"><%= content %></div>' +
+'<div class="post-tags"><%= tags.join(", ") %></div>' +
+'</div>'
 
 var adminTemp = `
 <div id="msgArea">

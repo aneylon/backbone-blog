@@ -95,14 +95,6 @@ var Posts = Backbone.Firebase.Collection.extend({
 
 var posts = new Posts()
 
-var postTemplate = '<div class="post">'+
-'<img src="<%- \'img/\'+ images %>" alt="<%= images %>" class="post-img"/>' +
-'<div class="post-title"><%= title %></div>' +
-'<div class="post-date"><%= date %></div>' +
-'<div class="post-content"><%= content %></div>' +
-'<div class="post-tags"><%= tags %></div>' +
-'</div>'
-
 var PostView = Backbone.View.extend({
   template: _.template(postTemplate),
   initilize: function(){

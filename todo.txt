@@ -1,4 +1,6 @@
-https://www.firebase.com/docs/web/libraries/backbone/quickstart.html
+Images and Posts
+readme - homepage vs project
+Change fb url - https://www.firebase.com/docs/web/libraries/backbone/quickstart.html
 
 Routes
 Fonts
@@ -11,9 +13,9 @@ uglify
 rollup.js - tree shaking
 ? grunt / gulp
 
-
-
 x Highlight JS
 ? markdown
 
 ES6 ?
+
+Tests!
