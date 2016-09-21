@@ -4,6 +4,7 @@ Routes
 Fonts
 Input validation
 Tags - links
+Errors
 
 minify
 uglify

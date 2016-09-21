@@ -14,7 +14,18 @@ var ImagesView = Backbone.View.extend({
 
 var AboutView = Backbone.View.extend({
   render: function(){
-    this.$el.html('About View')
+    this.$el.html(aboutTemp)
+    return this
+  }
+})
+
+var AdminView = Backbone.View.extend({
+  render: function(){
+    this.$el.html(adminTemp)
+    checkLogin()
+    setTimeout(()=>{
+      setDate()
+    },0)
     return this
   }
 })
@@ -150,6 +161,9 @@ var Router = Backbone.Router.extend({
   viewAbout: function(){
     this.loadView(new AboutView())
   },
+  viewAdmin: function(){
+    this.loadView(new AdminView())
+  },
   loadView: function(view){
     if(this._currentView){
       this._currentView.remove()
@@ -167,7 +181,6 @@ var NavView = Backbone.View.extend({
     'click': 'onClick'
   },
   onClick: function(e){
-    console.log('router nav click')
     var $li = $(e.target)
     router.navigate($li.attr('data-url'), {trigger: true})
   }

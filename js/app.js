@@ -7,17 +7,7 @@ var date
 $(function(){
   setDate()
   token = window.localStorage.getItem(blogName)
-  if(token){
-    var fbRef = new Firebase(fbURL)
-    fbRef.authWithCustomToken(token, function(err, authData){
-      if(err) console.log('error', err)
-      else{
-        showLoginView()
-      }
-    })
-  } else {
-    showLogoutView()
-  }
+  checkLogin()
 
   $('body').on('click', '.toggle', function(){
     $(this).parent().children('form').slideToggle('fast')
@@ -29,6 +19,20 @@ $(function(){
     // display modal for img
   })
 })
+
+var checkLogin = function(){
+  if(token){
+    var fbRef = new Firebase(fbURL)
+    fbRef.authWithCustomToken(token, function(err, authData){
+      if(err) console.log('error', err)
+      else{
+        showLoginView()
+      }
+    })
+  } else {
+    showLogoutView()
+  }
+}
 
 var setDate = function(){
   date = new Date() // date.getDate()(day) .getFullYear() .getMonth()(+1)
