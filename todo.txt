@@ -1,4 +1,11 @@
-Images and Posts
+A#1 - Images and Projects views
+  - modal for images
+  - db cols for nav, projects, images?
+
+copy old post info and images
+
+Posts - use fb .orderby query rather than js hack?
+
 readme - homepage vs project
 Change fb url - https://www.firebase.com/docs/web/libraries/backbone/quickstart.html
 
@@ -7,6 +14,8 @@ Fonts
 Input validation
 Tags - links
 Errors
+
+Extra credit - Admin, modify posts?
 
 minify
 uglify
