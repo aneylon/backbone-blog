@@ -1,6 +1,7 @@
 A#1 - Images and Projects views
   - modal for images
   - db cols for nav, projects, images?
+  - templates for projects and images.
 
 copy old post info and images
 
