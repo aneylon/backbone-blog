@@ -1,3 +1,17 @@
+var projectsTemp = `
+<div class="post">
+  <div src="post-title"><%= title %></div>
+  <img src="<%- \'img/\' + image %>" alt="<%= image %>" class="post-img" />
+  <div class="post-content"><%= content %></div>
+</div>
+`
+
+var imagesTemp = `
+<div class="image-post">
+  <img src="<%- \'img/\' + image %>" alt="<%= image %>" class="post-img" />
+</div>
+`
+
 var aboutTemp = `
 <div class="about">
   <img src="img/test1.png" />
@@ -10,14 +24,16 @@ var aboutTemp = `
 </div>
 `
 
-var postTemplate = '<div class="post">'+
-'<div class="post-title"><%= title %></div>' +
-'<div class="post-date"><%= date %></div>' +
-'<div class="spacer"></div>' +
-'<img src="<%- \'img/\'+ images %>" alt="<%= images %>" class="post-img"/>' +
-'<div class="post-content"><%= content %></div>' +
-'<div class="post-tags"><%= tags.join(", ") %></div>' +
-'</div>'
+var postTemplate = `
+<div class="post">
+  <div class="post-title"><%= title %></div>
+  <div class="post-date"><%= date %></div>
+  <div class="spacer"></div>
+  <img src="<%- \'img/\'+ images %>" alt="<%= images %>" class="post-img"/>
+  <div class="post-content"><%= content %></div>
+  <div class="post-tags"><%= tags.join(", ") %></div>
+</div>
+`
 
 var adminTemp = `
 <div id="msgArea">

@@ -1,6 +1,6 @@
 var ProjectsView = Backbone.View.extend({
   render: function(){
-    this.$el.html('Projects View')
+    this.$el.html(projectsTemp)
     return this
   }
 })
