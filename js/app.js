@@ -53,6 +53,8 @@ var showLoginView = function(){
   hideElement('#signUpSection', 'fast', ()=>{})
   showElement('#logOutSection', 'fast', ()=>{})
   showElement('#addSection', 'fast', ()=>{})
+  showElement('#addProject', 'fast', ()=>{})
+  showElement('#addImage', 'fast', ()=>{})
 }
 
 var showLogoutView = function(){
@@ -60,6 +62,8 @@ var showLogoutView = function(){
   hideElement('#logOutSection', 'fast', ()=>{})
   showElement('#signUpSection', 'fast', ()=>{})
   showElement('#loginSection', 'fast', ()=>{})
+  hideElement('#addProject', 'fast', ()=>{})
+  hideElement('#addImage', 'fast', ()=>{})
 }
 
 var AddPost = function(){
