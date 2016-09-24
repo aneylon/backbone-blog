@@ -66,34 +66,109 @@ var showLogoutView = function(){
   hideElement('#addImage', 'fast', ()=>{})
 }
 
+// fbRef.child(name).set(newThing)
 var AddPost = function(){
   var fbRef = new Firebase(fbURL + '/posts')
-  var titleField = document.getElementById('inputTitle')
-  var dateField = document.getElementById('inputDate')
-  var contentField = document.getElementById('inputContent')
-  var imagesField = document.getElementById('inputImages')
-  var tagsField = document.getElementById('inputTags')
 
-  var newThing = {
-    title: titleField.value,
-    date: dateField.value,
-    // content: markdown.toHTML(contentField.value),
-    content: contentField.value,
-    images: imagesField.value,
-    tags: tagsField.value.split(',').map(function(tag){return tag.trimLeft()})
-  }
-  // fbRef.child(name).set(newThing)
   var authData = fbRef.getAuth()
   if(authData){
-    fbRef.push(newThing, function(err){ if(err) console.log('error adding:', err)})
-  }
 
-  titleField.value = ''
-  dateField.value = ''
-  contentField.value = ''
-  imagesField.value = ''
-  tagsField.value = ''
-  setDate()
+    var titleField = document.getElementById('inputTitle')
+    var dateField = document.getElementById('inputDate')
+    var contentField = document.getElementById('inputContent')
+    var imagesField = document.getElementById('inputImages')
+    var tagsField = document.getElementById('inputTags')
+
+    var newThing = {
+      title: titleField.value,
+      date: dateField.value,
+      content: contentField.value,
+      images: imagesField.value,
+      tags: tagsField.value.split(',').map(function(tag){return tag.trimLeft()})
+    }
+
+    fbRef.push(newThing, function(err){
+      if(err) {
+        console.log('error adding:', err)
+        ShowMessage('#msgArea', 'Adding Failed', 'fail')
+      }
+    })
+    
+    titleField.value = ''
+    dateField.value = ''
+    contentField.value = ''
+    imagesField.value = ''
+    tagsField.value = ''
+    setDate()
+  } else {
+    ShowMessage('#msgArea', 'Auth Failed', 'fail')
+  }
+}
+
+var AddImage = function(){
+  var fbRef = new Firebase(fbURL + '/images')
+  var authData = fbRef.getAuth()
+  if(authData){
+    // get fields
+    var imgField = document.getElementById('inputImageImage')
+    // make obj
+    var newImg = {
+      image: imgField.value
+    }
+    // push to db
+    fbRef.push(newImg, function(err) {
+      if(err){
+        console.log('error adding: ', err)
+        ShowMessage('#msgArea', 'Adding Failed', 'fail')
+      }
+    })
+    // clear fields
+    imgField.value = ''
+  } else {
+    ShowMessage('#msgArea', 'Auth Failed', 'fail')
+  }
+}
+
+var AddProject = function(){
+  var fbRef = new Firebase(fbURL + '/projects')
+  var authData = fbRef.getAuth()
+  if(authData){
+    // get fields
+    var titleField = document.getElementById('inputProjectTitle')
+    var descriptionField = document.getElementById('inputProjectDescription')
+    var imageField = document.getElementById('inputProjectImage')
+    // make new obj
+    var newProj = {
+      title: titleField.value,
+      description: descriptionField.value,
+      image: imageField.value,
+    }
+    // push to db
+    fbRef.push(newProj, function(err){
+      if(err){
+        console.log('error adding: ', err)
+        ShowMessage('#msgArea', 'Adding Failed', 'fail')
+      }
+    })
+    // clear fields
+    titleField.value = ''
+    descriptionField.value = ''
+    imageField.value = ''
+  } else {
+    ShowMessage('#msgArea', 'Auth Failed', 'fail')
+  }
+}
+
+var ShowMessage = function(tag, message, style){
+  var classes = ['fail', 'success']
+  // remove old
+  $(tag).html('')
+  classes.forEach(function(class){
+    $(tag).removeClass(class)
+  })
+  // add new
+  $(tag).html(message)
+  $(tag).addClass(style)
 }
 
 var SignUp = function(){
