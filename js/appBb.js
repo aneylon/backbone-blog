@@ -7,7 +7,7 @@ var ProjectsView = Backbone.View.extend({
 
 var ImagesView = Backbone.View.extend({
   render: function(){
-    this.$el.html('Images View')
+    this.$el.html(imagesTemp)
     return this
   }
 })

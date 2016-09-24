@@ -71,9 +71,27 @@ var adminTemp = `
     <input type="text" placeholder="Date" id="inputDate" required>
     <!-- <input type="text" placeholder="Content" id="inputContent" required> -->
     <textarea placeholder="Content" id="inputContent"></textarea>
-    <input type="text" placeholder="Images" id="inputImages">
+    <input type="text" placeholder="Image" id="inputImages">
     <input type="text" placeholder="Tags" id="inputTags">
     <input type="button" onClick="AddPost()" value="Submit">
+  </form>
+</div>
+
+<div id="addProject" class="input-group hideOnStart">
+  <h2 id="addProjectTitle" class="input-group title toggle">Add Project</h2>
+  <form id="addProjectForm" class="input-group form hideOnStart">
+    <input type="text" placeholder="Title" id="inputProjectTitle" required />
+    <textarea placeholder="Description" id="inputProjectDescription"></textarea>
+    <input type="text" placeholder="Image" id="inputProjectImage" />
+    <input type="button" onClick="AddProject()" value="Submit" />
+  </form>
+</div>
+
+<div id="addImage" class="input-group hideOnStart">
+  <h2 id="addImage" class="input-group title toggle">Add Image</h2>
+  <form id="addImageForm" class="input-group form hideOnStart">
+    <input type="text" placeholder="Image" id="inputImageImage" />
+    <input type="button" onClick="AddImage()" value="Submit" />
   </form>
 </div>
 
