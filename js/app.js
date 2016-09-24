@@ -93,7 +93,7 @@ var AddPost = function(){
         ShowMessage('#msgArea', 'Adding Failed', 'fail')
       }
     })
-    
+
     titleField.value = ''
     dateField.value = ''
     contentField.value = ''
@@ -163,8 +163,8 @@ var ShowMessage = function(tag, message, style){
   var classes = ['fail', 'success']
   // remove old
   $(tag).html('')
-  classes.forEach(function(class){
-    $(tag).removeClass(class)
+  classes.forEach(function(cls){
+    $(tag).removeClass(cls)
   })
   // add new
   $(tag).html(message)
