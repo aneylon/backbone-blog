@@ -2,7 +2,7 @@ var projectsTemp = `
 <div class="post">
   <div src="post-title"><%= title %></div>
   <img src="<%- \'img/\' + image %>" alt="<%= image %>" class="post-img" />
-  <div class="post-content"><%= content %></div>
+  <div class="post-content"><%= description %></div>
 </div>
 `
 

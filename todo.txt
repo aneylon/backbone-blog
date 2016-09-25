@@ -1,8 +1,10 @@
 A#1 - Images and Projects views
   - modal for images
-  - db cols for nav, projects, images?
-  - templates for projects and images.
-
+  - db col for nav?
+  x db cols for projects, images
+  x templates for projects and images.
+  - move events to backbone views or whatever
+  
 copy old post info and images
 
 Posts - use fb .orderby query rather than js hack?
