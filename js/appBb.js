@@ -1,17 +1,3 @@
-var ProjectsView = Backbone.View.extend({
-  render: function(){
-    this.$el.html(projectsTemp)
-    return this
-  }
-})
-
-var ImagesView = Backbone.View.extend({
-  render: function(){
-    this.$el.html(imagesTemp)
-    return this
-  }
-})
-
 var AboutView = Backbone.View.extend({
   render: function(){
     this.$el.html(aboutTemp)
@@ -44,9 +30,6 @@ var Links = Backbone.Collection.extend({
 var LinkView = Backbone.View.extend({
   tagName: 'li',
   template: _.template('<a data-url="<%= url %>" class="button grey"><%= text %>'),
-  initilize: function(){
-    this.render()
-  },
   render: function(){
     this.$el.html(this.template(this.model.attributes))
     return this
@@ -55,9 +38,6 @@ var LinkView = Backbone.View.extend({
 
 var LinksView = Backbone.View.extend({
   el: '#navLinks',
-  initilize: function(){
-    this.render()
-  },
   render: function(){
     this.$el.html('')
     this.collection.forEach(function(link){
@@ -78,6 +58,68 @@ var links = new Links([
 var linksView = new LinksView({collection: links})
 linksView.render()
 
+var Image = Backbone.Model.extend({
+  defaults: {
+    image: ''
+  }
+})
+
+var Images = Backbone.Firebase.Collection.extend({
+  url: fbURL + '/images',
+  model: Image
+})
+
+var ImageView = Backbone.View.extend({
+  template: _.template(imagesTemp),
+  render: function(){
+    this.$el.html(this.template(this.model.attributes))
+    return this
+  }
+})
+
+var ImagesView = Backbone.View.extend({
+  render: function(){
+    this.$el.html('')
+    this.collection.forEach(function(item){
+      var imageView = new ImageView({ model : item })
+      this.$el.append(imageView.render().$el)
+    }, this)
+    return this
+  }
+})
+
+var Project = Backbone.Model.extend({
+  defaults: {
+    title: '',
+    image: '',
+    description: ''
+  }
+})
+
+var Projects = Backbone.Firebase.Collection.extend({
+  url: fbURL + '/projects',
+  model: Project
+})
+
+var ProjectView = Backbone.View.extend({
+  template: _.template(projectsTemp),
+  render: function(){
+    this.$el.html(this.template(this.model.attributes))
+    return this
+  }
+})
+
+var ProjectsView = Backbone.View.extend({
+  render: function(){
+    this.$el.html('')
+    this.collection.forEach(function(item){
+      var projectView = new ProjectView({ model: item })
+      this.$el.append(projectView.render().$el)
+    }, this)
+    return this
+  }
+})
+
 var Post = Backbone.Model.extend({
   defaults: {
     title: '',
@@ -93,13 +135,8 @@ var Posts = Backbone.Firebase.Collection.extend({
   model: Post
 })
 
-var posts = new Posts()
-
 var PostView = Backbone.View.extend({
   template: _.template(postTemplate),
-  initilize: function(){
-    this.render()
-  },
   render: function(){
     this.$el.html(this.template(this.model.attributes))
     return this
@@ -117,7 +154,7 @@ var PostsView = Backbone.View.extend({
       var postView = new PostView({ model: item })
       this.$el.append(postView.render().$el)
     }, this)
-    // event for 'onRender'?
+
     setTimeout(function(){
       $('code').each(function(i, block) {
         hljs.highlightBlock(block);
@@ -126,8 +163,6 @@ var PostsView = Backbone.View.extend({
     return this
   }
 })
-
-var postsView = new PostsView({ collection: posts })
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -145,10 +180,16 @@ var Router = Backbone.Router.extend({
     })
   },
   viewProjects: function(){
-    this.loadView(new ProjectsView())
+    var projects = new Projects()
+    projects.on('sync', (col)=>{
+      this.loadView(new ProjectsView({ collection: projects }))
+    })
   },
   viewImages: function(){
-    this.loadView(new ImagesView())
+    var images = new Images()
+    images.on('sync', col => {
+      this.loadView(new ImagesView({ collection: images }))
+    })
   },
   viewAbout: function(){
     this.loadView(new AboutView())

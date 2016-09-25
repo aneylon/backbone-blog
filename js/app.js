@@ -7,7 +7,6 @@ var date
 $(function(){
   setDate()
   token = window.localStorage.getItem(blogName)
-  checkLogin()
 
   $('body').on('click', '.toggle', function(){
     $(this).parent().children('form').slideToggle('fast')
@@ -35,7 +34,7 @@ var checkLogin = function(){
 }
 
 var setDate = function(){
-  date = new Date() // date.getDate()(day) .getFullYear() .getMonth()(+1)
+  date = new Date()
   date = date.getMonth()+1 + '-' + date.getDate() + '-' + date.getFullYear()
   $('#inputDate').val(date)
 }
