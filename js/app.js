@@ -8,10 +8,6 @@ $(function(){
   setDate()
   token = window.localStorage.getItem(blogName)
 
-  $('body').on('click', '.toggle', function(){
-    $(this).parent().children('form').slideToggle('fast')
-  })
-
   $('body').on('click', '.post-img', function(){
     // $(this).
     console.log('clicked img')

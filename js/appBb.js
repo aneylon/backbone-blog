@@ -6,6 +6,12 @@ var AboutView = Backbone.View.extend({
 })
 
 var AdminView = Backbone.View.extend({
+  events: {
+    'click .toggle': 'toggleView'
+  },
+  toggleView: function(e){
+    $(e.target).parent().children('form').slideToggle('fast')
+  },
   render: function(){
     this.$el.html(adminTemp)
     checkLogin()
