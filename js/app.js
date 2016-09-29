@@ -9,17 +9,21 @@ $(function(){
   token = window.localStorage.getItem(blogName)
 
   $('body').on('click', '.post-img', function(){
-    showImage($(this)[0].src)
+    showImage($(this).attr('src'))
+  })
+
+  $('body').on('click', '.modal', function(){
+    hideImage()
   })
 })
 
 var showImage = function(imgUrl){
-  console.log('show modal with', imgUrl)
-  // assign imgUrl to modal image and toggle display
+  $('#modal-image').attr('src', imgUrl)
+  $('#modal').css('display', 'block')
 }
 
 var hideImage = function(){
-  // toggle display of modal
+  $('#modal').css('display', 'none')
 }
 
 var checkLogin = function(){
