@@ -9,11 +9,18 @@ $(function(){
   token = window.localStorage.getItem(blogName)
 
   $('body').on('click', '.post-img', function(){
-    // $(this).
-    console.log('clicked img')
-    // display modal for img
+    showImage($(this)[0].src)
   })
 })
+
+var showImage = function(imgUrl){
+  console.log('show modal with', imgUrl)
+  // assign imgUrl to modal image and toggle display
+}
+
+var hideImage = function(){
+  // toggle display of modal
+}
 
 var checkLogin = function(){
   if(token){
