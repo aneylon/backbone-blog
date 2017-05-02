@@ -1,0 +1,27 @@
+Server
+  Routes
+  Database
+  Auth
+
+Front End
+  Setup
+  Get Data
+  Send Data
+  Auth
+  UI / Responsive
+
+Tests
+  Front End
+  Back End
+
+Tools
+  Gulp
+    CSS
+      SASS
+      Combine
+    JS
+      Lint
+      Combine
+
+CI
+Deploy
