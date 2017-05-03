@@ -3,13 +3,18 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const path = require('path')
+const bodyParser = require('body-parser')
 const port = process.env.PORT || 8080
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.use(express.static('public'))
 
-app.get('/test', (req, res) => {
-  res.send('it is alive')
-})
+const usersRoutes = require('./routes/users')(express)
+const postsRoutes = require('./routes/posts')(express)
+app.use('/users', usersRoutes)
+app.use('/posts', postsRoutes)
 
 app.get('*', (req, res) => {
   // res.sendFile(path.join(__dirname, '../', 'public', 'index.html'))
