@@ -1,5 +1,6 @@
 const gulp = require('gulp')
 const plugins = require('gulp-load-plugins')()
+const standard = require('gulp-standard')
 
 gulp.task('js', () => {
   return gulp.src([
@@ -13,4 +14,15 @@ gulp.task('js', () => {
     .pipe(gulp.dest('./public/js'))
 })
 
-gulp.task('default', ['js'])
+gulp.task('lint', () => {
+  return gulp.src([
+    './src/**/*.js'
+  ])
+    .pipe(standard())
+    .pipe(standard.reporter('default', {
+      breakOnError: true,
+      quiet: true
+    }))
+})
+
+gulp.task('default', ['lint', 'js'])

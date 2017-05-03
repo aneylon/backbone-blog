@@ -1,4 +1,7 @@
 // console.log('test')
+/* global
+  Backbone
+*/
 
 const TestModel = Backbone.Model.extend()
 let TestCol = Backbone.Collection.extend({
@@ -7,7 +10,7 @@ let TestCol = Backbone.Collection.extend({
 })
 const testCol = new TestCol()
 testCol.fetch({
-  success(col, res, opt){
+  success (col, res, opt) {
     console.log('got er')
     testViews.render()
   }
@@ -15,21 +18,21 @@ testCol.fetch({
 
 const TestView = Backbone.View.extend({
   tagName: 'ul',
-  render(){
+  render () {
     this.$el.html(this.model.get('name') + ' : ' + this.model.get('id'))
     return this
   }
 })
 
 const TestViews = Backbone.View.extend({
-  el:'#app',
-  initialize(){
+  el: '#app',
+  initialize () {
     // this.render()
   },
-  render(){
+  render () {
     this.$el.html('')
     this.model.forEach((item) => {
-      let testView = new TestView({ model: item})
+      let testView = new TestView({ model: item })
       this.$el.append(testView.render().$el)
     })
     return this
