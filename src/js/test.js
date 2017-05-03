@@ -1,4 +1,3 @@
-// console.log('test')
 /* global
   Backbone
 */
