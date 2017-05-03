@@ -4,11 +4,9 @@ const browserSync = require('browser-sync')
 
 gulp.task('serve', () => {
   browserSync.init({
-    // server: {
-    //   baseDir: './public'
-    // },
     proxy: 'localhost:8080'
   })
+  gulp.watch('./public/*.html').on('change', browserSync.reload)
 })
 
 gulp.task('watch', () => {
@@ -16,6 +14,19 @@ gulp.task('watch', () => {
     './src/js/**/*.js',
     './server/**/*.js'
   ],['js'])
+  gulp.watch(['./src/scss/**/*.scss'], ['css'])
+})
+
+gulp.task('css', () => {
+  return gulp.src([
+    './src/scss/**/*.scss'
+  ])
+    .pipe(plugins.concat('style.css'))
+    .pipe(plugins.sass().on('error', plugins.sass.logError))
+    // .pipe(plugins.cssmin())
+    .pipe(plugins.autoprefixer())
+    .pipe(gulp.dest('./public/css'))
+    .pipe(browserSync.stream())
 })
 
 gulp.task('js', () => {
@@ -42,4 +53,4 @@ gulp.task('lint', () => {
     }))
 })
 
-gulp.task('default', ['lint', 'js', 'watch', 'serve'])
+gulp.task('default', ['css', 'lint', 'js', 'watch', 'serve'])

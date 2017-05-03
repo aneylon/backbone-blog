@@ -1,0 +1,10 @@
+$some-gree: #0f0;
+$some-blue: #00f;
+$some-red: #f00;
+
+body {
+  color: $some-red;
+  div {
+    color: $some-blue;
+  }
+}
