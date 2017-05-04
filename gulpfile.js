@@ -31,13 +31,18 @@ gulp.task('css', () => {
 
 gulp.task('js', () => {
   return gulp.src([
-    './src/js/*.js'
+    './src/js/links.js',
+    './src/js/about.js',
+    './src/js/admin.js',
+    './src/js/contact.js',
+    './src/js/posts.js',
+    './src/js/router.js'
   ])
     .pipe(plugins.babel({
       presets: ['es2015']
     }))
     .pipe(plugins.concat('app.js'))
-    .pipe(plugins.uglify())
+    // .pipe(plugins.uglify())
     .pipe(gulp.dest('./public/js'))
     .pipe(browserSync.stream())
 })
@@ -53,4 +58,4 @@ gulp.task('lint', () => {
     }))
 })
 
-gulp.task('default', ['css', 'lint', 'js', 'watch', 'serve'])
+gulp.task('default', ['css', 'js', 'watch', 'serve'])

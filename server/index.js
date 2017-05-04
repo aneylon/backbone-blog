@@ -17,8 +17,8 @@ app.use('/users', usersRoutes)
 app.use('/posts', postsRoutes)
 
 app.get('*', (req, res) => {
-  // res.sendFile(path.join(__dirname, '../', 'public', 'index.html'))
-  res.redirect('/')
+  res.sendFile(path.join(__dirname, '../', 'public', 'index.html'))
+  // res.redirect('/')
 })
 
 app.listen(port, () => {

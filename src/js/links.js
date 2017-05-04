@@ -1,7 +1,6 @@
 /* global
   Backbone
 */
-
 const Link = Backbone.Model.extend()
 const Links = Backbone.Collection.extend({
   model: Link
@@ -15,7 +14,9 @@ const links = new Links([
 const LinkView = Backbone.View.extend({
   tagName: 'li',
   render () {
-    this.$el.html('a link')
+    this.$el.html(`${this.model.get('text')}`)
+    this.$el.attr('data-url', this.model.get('url'))
+    return this
   }
 })
 
@@ -25,9 +26,13 @@ const LinksView = Backbone.View.extend({
     this.render()
   },
   render () {
-    this.$el.html('links here')
+    this.$el.html('')
+    this.model.forEach( link => {
+      let newLink = new LinkView({ model: link })
+      this.$el.append(newLink.render().$el)
+    })
     return this
   }
 })
 
-const linksView = new LinksView()
+const linksView = new LinksView({ model: links })
