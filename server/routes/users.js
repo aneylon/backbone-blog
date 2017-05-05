@@ -7,10 +7,16 @@ module.exports = function (express) {
     res.send('get users')
   })
 
-  router.post('/', (req, res) => {
-    const { id } = req.body
-    console.log(id)
-    res.send('add new user ' + id)
+  router.post('/signup', (req, res) => {
+    const { username } = req.body
+    console.log(username)
+    res.send('signup user ' + username)
+  })
+
+  router.post('/signin', (req, res) => {
+    const { username } = req.body
+    console.log(username)
+    res.send('signin user ' + username)
   })
 
   router.put('/', userAuth, (req, res) => {

@@ -36,9 +36,18 @@
   <p>About info here.</p>
 </script>
 
+<script id="addPostsTemplate" type="text/template">
+    <h1>Add Post</h1>
+    <form submit="addPost()">
+      <input type="text" placeholder="title" id="addPostTitle">
+      <textarea cols="30" rows="10" id="addPostText"></textarea>
+      <button type="submit">add post</button>
+    </form>
+</script>
+
 <script id="adminTemplate" type="text/template">
-  <h1>Admin Page</h1>
-  <p>Admin info here.</p>
+  <h1>Admin</h1>
+  <p>Testing</p>
 </script>
 
 <script id="contactTemplate" type="text/template">
@@ -49,6 +58,24 @@
 
 <script id="postsTemplate" type="text/template">
   <%= name %> : <%= id %>
+</script>
+
+<script id="signinTemplate" type="text/template">
+  <h2>Signin</h2>
+  <form submit="signin()">
+    <input type="text" placeholder="username" id="signinUsername">
+    <input type="password" placeholder="password" id="signinPassword">
+    <button type="submit">signin</button>
+  </form>
+</script>
+
+<script id="signupTemplate" type="text/template">
+  <h2>Signup</h2>
+  <form submit="signup()">
+    <input type="email" placeholder="email" id="signupUsername">
+    <input type="password" placeholder="password" id="signupPassword">
+    <button type="submit">signup</button>
+  </form>
 </script>
 
 

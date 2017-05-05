@@ -17,9 +17,9 @@ module.exports = function (express) {
   })
 
   router.post('/', userAuth, (req, res) => {
-    const { id } = req.body
-    console.log(id)
-    res.send('new post ' + id)
+    const { title } = req.body
+    console.log(title)
+    res.send('new post ' + title)
   })
 
   router.put('/', userAuth, (req, res) => {

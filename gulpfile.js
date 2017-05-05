@@ -51,7 +51,7 @@ gulp.task('js', () => {
 gulp.task('html', () => {
   return gulp.src([
     './src/html/index.html',
-    './src/html/templates/*.html',
+    './src/html/templates/**/*.html',
     './src/html/scripts.html',
     './src/html/end.html'
   ])
