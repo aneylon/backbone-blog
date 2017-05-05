@@ -6,15 +6,16 @@ gulp.task('serve', () => {
   browserSync.init({
     proxy: 'localhost:8080'
   })
-  gulp.watch('./public/*.html').on('change', browserSync.reload)
+  // gulp.watch('./public/*.html').on('change', browserSync.reload)
 })
 
 gulp.task('watch', () => {
   gulp.watch([
     './src/js/**/*.js',
     './server/**/*.js'
-  ],['js'])
+  ], ['js'])
   gulp.watch(['./src/scss/**/*.scss'], ['css'])
+  gulp.watch(['./src/html/**/*.html'], ['html'])
 })
 
 gulp.task('css', () => {
@@ -47,6 +48,18 @@ gulp.task('js', () => {
     .pipe(browserSync.stream())
 })
 
+gulp.task('html', () => {
+  return gulp.src([
+    './src/html/index.html',
+    './src/html/templates/*.html',
+    './src/html/scripts.html',
+    './src/html/end.html'
+  ])
+    .pipe(plugins.concat('index.html'))
+    .pipe(gulp.dest('./public'))
+    .pipe(browserSync.stream())
+})
+
 gulp.task('lint', () => {
   return gulp.src([
     './src/**/*.js'
@@ -58,4 +71,11 @@ gulp.task('lint', () => {
     }))
 })
 
-gulp.task('default', ['css', 'js', 'watch', 'serve'])
+gulp.task('default', [
+  // 'lint',
+  'css',
+  'html',
+  'js',
+  'watch',
+  'serve'
+])

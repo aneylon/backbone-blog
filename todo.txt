@@ -1,11 +1,16 @@
+handle single post
+admin
+auth
+database
+
 Server
-  Routes
+  ~ Routes
   Database
   Auth
 
 Front End
-  Setup
-  Get Data
+  ~ Setup
+  ~ Get Data
   Send Data
   Auth
   UI / Responsive
@@ -14,14 +19,17 @@ Tests
   Front End
   Back End
 
-Tools
-  Gulp
-    CSS
-      SASS
-      Combine
-    JS
-      Lint
-      Combine
+x Tools
+  x Gulp
+    x CSS
+      x SASS
+      x Combine
+    x JS
+      x Lint
+      x Combine
+    x html
+      x combine
+    x Refresh
 
 CI
 Deploy

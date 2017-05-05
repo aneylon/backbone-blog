@@ -26,10 +26,17 @@ const Router = Backbone.Router.extend({
     if(id !== null){
       view = new PostsView({ id })
     } else {
-      view = new PostsView()
+      if(posts.length === 0){
+        setTimeout(function(){
+          view = new PostsView({ model: posts })
+          view.render()
+        }, 1000)
+      } else {
+        view = new PostsView({ model: posts })
+        view.render()
+      }
     }
 
-    view.render()
   }
 })
 let router = new Router()
