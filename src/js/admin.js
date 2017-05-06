@@ -18,6 +18,7 @@ let SigninView = Backbone.View.extend({
       function(data, status) {
         console.log('data', data)
         console.log('status', status)
+        // if success store token
       }
     )
   },
@@ -66,6 +67,7 @@ let AddPostView = Backbone.View.extend({
     console.log({ title, text })
     $.post(
       '/posts',
+      // send token
       { title, text },
       function(data, status) {
         console.log('data', data)

@@ -2,6 +2,7 @@ handle single post
 admin
 auth
 database
+markdown
 
 Server
   ~ Routes
@@ -11,13 +12,16 @@ Server
 Front End
   ~ Setup
   ~ Get Data
-  Send Data
+  ~ Send Data
   Auth
   UI / Responsive
 
 Tests
   Front End
   Back End
+
+CI
+Deploy
 
 x Tools
   x Gulp
@@ -30,8 +34,5 @@ x Tools
     x html
       x combine
     x Refresh
-
-CI
-Deploy
 
 https://github.com/powmedia/backbone-forms
