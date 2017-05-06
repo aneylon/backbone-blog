@@ -8,15 +8,6 @@ let Posts = Backbone.Collection.extend({
 })
 let posts = new Posts()
 
-posts.fetch({
-  success(){
-    console.log('posts fetch success')
-  },
-  fail(){
-    console.log('posts fetch fail')
-  }
-})
-
 let PostView = Backbone.View.extend({
   tagName: 'li',
   template: _.template($('#postsTemplate').html()),

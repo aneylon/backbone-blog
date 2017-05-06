@@ -22,21 +22,19 @@ const Router = Backbone.Router.extend({
     view.render()
   },
   viewPosts (id) {
-    let view
-    if(id !== null){
-      view = new PostsView({ id })
-    } else {
-      if(posts.length === 0){
-        setTimeout(function(){
-          view = new PostsView({ model: posts })
-          view.render()
-        }, 1000)
-      } else {
-        view = new PostsView({ model: posts })
+    console.log('new view')
+    posts.fetch({
+      success(){
+        console.log('posts fetch success')
+        let view = new PostsView({ model: posts })
+        view.render()
+      },
+      fail(){
+        console.log('posts fetch fail')
+        let view = new ErrorView()
         view.render()
       }
-    }
-
+    })
   }
 })
 let router = new Router()

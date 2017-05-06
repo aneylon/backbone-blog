@@ -37,6 +37,7 @@ gulp.task('js', () => {
     './src/js/admin.js',
     './src/js/contact.js',
     './src/js/posts.js',
+    './src/js/error.js',
     './src/js/router.js'
   ])
     .pipe(plugins.babel({

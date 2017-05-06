@@ -1,11 +1,11 @@
 const userAuth = require('../middleware/userAuth')
 
 let posts = [
-  { name: 'one', id:1 },
-  { name: 'two', id:2 },
-  { name: 'three', id:3 },
-  { name: 'four', id:4 },
-  { name: 'five', id:5 }
+  { title: 'one', text: 'one', id:1 },
+  { title: 'two', text: 'two', id:2 },
+  { title: 'three', text: 'three', id:3 },
+  { title: 'four', text: 'four', id:4 },
+  { title: 'five', text: 'five', id:5 }
 ]
 
 module.exports = function (express) {
@@ -17,9 +17,12 @@ module.exports = function (express) {
   })
 
   router.post('/', userAuth, (req, res) => {
-    const { title } = req.body
-    console.log(title)
-    res.send('new post ' + title)
+    const { title, text } = req.body
+    const newPost = { title, text, id: posts.length + 1 }
+    posts.push(newPost)
+    console.log(posts)
+    console.log(newPost)
+    res.send({ message: 'added', newPost })
   })
 
   router.put('/', userAuth, (req, res) => {
