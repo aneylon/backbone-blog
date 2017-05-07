@@ -1,3 +1,6 @@
+bcrypt-node
+jwt
+
 handle single post
 admin
 auth
