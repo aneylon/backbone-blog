@@ -4,7 +4,10 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
 const port = process.env.PORT || 8080
+
+app.use(morgan('dev'))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())

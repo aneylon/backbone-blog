@@ -8,8 +8,8 @@ let knex = require('knex')({
     // user: 'admin',
     // password: 'password',
     charset: 'utf8',
-    database: 'backboneblog',
-    filename: path.join(__dirname, './store/backboneblog.sqlite')
+    database: 'backboneblog1',
+    filename: path.join(__dirname, './store/backboneblog1.sqlite')
   }
 })
 
@@ -31,10 +31,11 @@ knex.schema.hasTable('users').then(function(exists){
   if(!exists) {
     knex.schema.createTable('users', function(user) {
       user.increments('id').primary()
-      user.string('username', 100).unique()
+      user.string('username', 100)//.unique()
       user.string('password', 100)
       user.timestamps()
-    }).then(function(){
+      user.unique('username')
+    }).then(function(table){
       console.log('Created Table', table)
     })
   }
