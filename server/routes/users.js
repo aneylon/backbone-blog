@@ -1,4 +1,5 @@
 const userAuth = require('../middleware/userAuth')
+const jwt = require('jsonwebtoken')
 let User = require('../database/models/user')
 let Users = require('../database/collections/users')
 
@@ -37,7 +38,15 @@ module.exports = function (express) {
       if(user){
         user.comparePassword(password, matches => {
           if(matches){
-            res.send({ success: true, message: 'User signed in', jot: 'a jot' })
+            let token = jwt.sign({
+              username,
+              userId: user.get('userId')
+            },
+            process.env.SECRET,
+            {
+              expiresIn: 1440
+            })
+            res.send({ success: true, message: 'User signed in', token })
           } else {
             res.send({ success: false, message: 'Password incorrect' })
           }
