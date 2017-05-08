@@ -1,59 +1,66 @@
 const userAuth = require('../middleware/userAuth')
-
-let users = [
-  { id: 1, username: 'admin', password: 'password' },
-  { id: 2, username: 'userOne', password: 'password' }
-]
+let User = require('../database/models/user')
+let Users = require('../database/collections/users')
 
 module.exports = function (express) {
   const router = express.Router()
 
   router.get('/', userAuth, (req, res) => {
-    res.send('get users')
+    Users.reset().fetch().then(function(users){
+      res.send(users.models)
+    })
   })
 
   router.post('/signup', (req, res) => {
     const { username, password } = req.body
-    console.log(username)
-    let userExists = users.find( item => {
-      return item.username === username
-    })
-    if(userExists){
-      console.log('user exists')
-      res.send({success: false, message: 'User exists'})
-    } else {
-      console.log('added user')
-      users.push({ username, password, id: users.length + 1 })
-      res.send({success: true, message: 'Signed up new user'})
-    }
+
+    new User({ username })
+      .fetch()
+      .then( user => {
+        if(!user) {
+          let newUser = new User({ username, password })
+          newUser.save()
+            .then( user => {
+              Users.add(user)
+              res.send({ success: true, message: 'Added new user', user })
+            })
+        } else {
+          res.send({ success: false, message: 'User exists' })
+        }
+      })
   })
 
   router.post('/signin', (req, res) => {
     const { username, password } = req.body
-    let user = users.reduce((acc, cur) => {
-      if(cur.username === username) {
-        return cur
+
+    new User({ username }).fetch().then( user => {
+      if(user){
+        user.comparePassword(password, matches => {
+          if(matches){
+            res.send({ success: true, message: 'User signed in', jot: 'a jot' })
+          } else {
+            res.send({ success: false, message: 'Password incorrect' })
+          }
+        })
       } else {
-        return acc
+        res.send({ success: false, message: 'Username incorrect' })
       }
-    }, false)
-    if(user !== false){
-      if(user.username === username) {
-        if(user.password === password){
-          res.send({success: true, message: 'User signed in'})
-        } else {
-          res.send({success: false, message: 'Password incorrect'})
-        }
-      }
-    } else {
-      res.send({success: false, message: 'Username incorrect'})
-    }
+    })
   })
 
   router.put('/', userAuth, (req, res) => {
-    const { id } = req.body
-    console.log(id)
-    res.send('update user ' + id)
+    const { username, password } = req.body
+
+    new User({ username }).fetch().then( user => {
+      if(user) {
+        user.set({ password })
+        user.save().then( user => {
+          res.send({ success: true, message: 'Password updated', user })
+        })
+      } else {
+        res.send({ success: false, message: 'User not found' })
+      }
+    })
   })
 
   return router

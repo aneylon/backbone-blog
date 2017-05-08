@@ -9,7 +9,7 @@ markdown
 
 Server
   ~ Routes
-  Database
+  ~ Database
   Auth
 
 Front End
