@@ -1,34 +1,39 @@
 const userAuth = require('../middleware/userAuth')
-
-let posts = [
-  { title: 'one', text: 'one', id:1 },
-  { title: 'two', text: 'two', id:2 },
-  { title: 'three', text: 'three', id:3 },
-  { title: 'four', text: 'four', id:4 },
-  { title: 'five', text: 'five', id:5 }
-]
+let Post = require('../database/models/post')
+let Posts = require('../database/collections/posts')
 
 module.exports = function (express) {
   const router = express.Router()
 
   router.get('/', (req, res) => {
-    // res.send('get posts')
-    res.send(posts)
+    Posts.reset().fetch().then(function(posts){
+      res.send(posts.models)
+    })
   })
 
   router.post('/', userAuth, (req, res) => {
-    const { title, text, userId } = req.body
-    const newPost = { userId, title, text, id: posts.length + 1 }
-    posts.push(newPost)
-    console.log(posts)
-    console.log(newPost)
-    res.send({ message: 'added', newPost })
+    let { title, text, userId } = req.body
+    userId = 1
+    let newPost = new Post({ userId, title, text })
+    newPost.save()
+      .then(function(post) {
+        Posts.add(post)
+        res.send({ message: 'added', newPost })
+      })
   })
 
   router.put('/', userAuth, (req, res) => {
-    const { id } = req.body
-    console.log(id)
-    res.send('mod post ' + id)
+    const { id, text } = req.body
+    new Post({ id }).fetch().then(function(post){
+      if(post){
+        post.set({ text })
+        post.save().then(post => {
+          res.send({ success: true, message: 'Post updated', post })
+        })
+      } else {
+        res.send({ success: false, message: 'Post not found' })
+      }
+    })
   })
 
   return router
