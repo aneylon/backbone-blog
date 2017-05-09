@@ -1,21 +1,18 @@
-jwt
-
 handle single post
-admin
-auth
-database
+error messages
 markdown
+break out admin.js
 
 Server
-  ~ Routes
-  ~ Database
-  Auth
+  x Routes
+  x Database
+  x Auth
 
 Front End
-  ~ Setup
-  ~ Get Data
-  ~ Send Data
-  Auth
+  x Setup
+  x Get Data
+  x Send Data
+  x Auth
   UI / Responsive
 
 Tests
@@ -36,5 +33,10 @@ x Tools
     x html
       x combine
     x Refresh
+
+extra credit
+check token on first page load
+edit posts
+update password
 
 https://github.com/powmedia/backbone-forms
