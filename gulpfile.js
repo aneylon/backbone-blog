@@ -35,6 +35,7 @@ gulp.task('js', () => {
     './src/js/events.js',
     './src/js/links.js',
     './src/js/about.js',
+    './src/js/admin/*.js',
     './src/js/admin.js',
     './src/js/contact.js',
     './src/js/posts.js',
