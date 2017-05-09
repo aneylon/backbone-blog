@@ -12,11 +12,10 @@ Simple Full Stack JavaScript blogging app featuring:
 
 Live Example : My-Backbone-Blog
 
-- Multiple Users
-
 ## Setup
 ### Local
-Include a `.env` file with the following settings.
+Include a `.env` file in the root of the app with the following settings.
 ```
-PORT = 8080
+PORT = 8080 # Whatever port you need
+SECRET = someSecret # For creating JWTs
 ```

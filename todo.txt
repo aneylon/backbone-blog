@@ -1,7 +1,6 @@
 handle single post
 error messages
 markdown
-break out admin.js
 
 Server
   x Routes
