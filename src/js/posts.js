@@ -10,6 +10,7 @@ let posts = new Posts()
 
 let PostView = Backbone.View.extend({
   tagName: 'li',
+  className: 'post',
   template: _.template($('#postsTemplate').html()),
   render () {
     this.$el.html(this.template(this.model.attributes))
@@ -26,6 +27,7 @@ let PostsView = Backbone.View.extend({
     } else {
       console.log('render all posts')
     }
+    console.log(this.model)
   },
   render () {
     this.$el.html('')

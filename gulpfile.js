@@ -32,6 +32,7 @@ gulp.task('css', () => {
 
 gulp.task('js', () => {
   return gulp.src([
+    './src/js/main.js',
     './src/js/events.js',
     './src/js/links.js',
     './src/js/about.js',

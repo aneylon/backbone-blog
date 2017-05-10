@@ -13,6 +13,7 @@ const links = new Links([
 
 const LinkView = Backbone.View.extend({
   tagName: 'li',
+  className: 'btn btn-default',
   render () {
     this.$el.html(`${this.model.get('text')}`)
     this.$el.attr('data-url', this.model.get('url'))
@@ -31,6 +32,7 @@ const LinksView = Backbone.View.extend({
       let newLink = new LinkView({ model: link })
       this.$el.append(newLink.render().$el)
     })
+    this.$el.addClass('btn-group')
     return this
   }
 })

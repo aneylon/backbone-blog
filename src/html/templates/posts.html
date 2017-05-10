@@ -1,4 +1,16 @@
-
 <script id="postsTemplate" type="text/template">
-  <%= title %> : <%= id %> : <%= text %>
+  <div class="panel panel-warning post">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <%= title %>
+      </h2>
+    </div>
+    <div class="panel-body">
+      <%= text %>
+    </div>
+    <div class="panel-footer">
+      <span class="text-right">date : #/#/##</span>
+    </div>
+  </div>
+  <!-- <%= id %>  -->
 </script>

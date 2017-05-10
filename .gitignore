@@ -3,6 +3,7 @@
 /node_modules/
 
 /public/js/app.js
+/public/css/style.css
 
 /public/index.html
 

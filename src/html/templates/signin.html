@@ -1,8 +1,16 @@
 <script id="signinTemplate" type="text/template">
-  <h2>Signin</h2>
-  <form submit="signin()">
-    <input type="text" placeholder="username" id="signinUsername">
-    <input type="password" placeholder="password" id="signinPassword">
-    <button type="submit">signin</button>
-  </form>
+  <div class="well">
+    <h2 class="toggle">Signin</h2>
+    <form class="hide-on-start">
+      <div class="form-group">
+        <label for="signinUsername">username</label>
+        <input class="form-control" type="text" placeholder="username" id="signinUsername">
+      </div>
+      <div class="form-group">
+        <label for="signinPassword">password</label>
+        <input class="form-control" type="password" placeholder="password" id="signinPassword">
+      </div>
+      <button type="submit" class="btn btn-default">signin</button>
+    </form>
+  </div>
 </script>

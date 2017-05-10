@@ -1,6 +1,8 @@
 handle single post
+date in post
+posts in reverse order
 error messages
-markdown
+? markdown
 
 Server
   x Routes
@@ -12,7 +14,8 @@ Front End
   x Get Data
   x Send Data
   x Auth
-  UI / Responsive
+  x UI
+  ~ Responsive
 
 Tests
   Front End
@@ -35,6 +38,7 @@ x Tools
 
 extra credit
 check token on first page load
+load posts by inc of ~10, pages
 edit posts
 update password
 
