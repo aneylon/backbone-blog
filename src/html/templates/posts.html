@@ -9,7 +9,7 @@
       <%= text %>
     </div>
     <div class="panel-footer">
-      <span class="text-right">date : #/#/##</span>
+      <%= moment(created_at).format('ddd.MMM.DD.YY') %>
     </div>
   </div>
   <!-- <%= id %>  -->
