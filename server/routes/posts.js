@@ -11,6 +11,20 @@ module.exports = function (express) {
     })
   })
 
+  router.get('/:id', (req, res) => {
+    let id = req.params.id
+    new Post({ id }).fetch().then(function(post){
+      if(post){
+        res.send(post)
+      } else {
+        res.send({
+          message: 'No post found matching that id',
+          success: false
+        })
+      }
+    })
+  })
+
   router.post('/', userAuth, (req, res) => {
     let { title, text, userId } = req.body
     userId = 1

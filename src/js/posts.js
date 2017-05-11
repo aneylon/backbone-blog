@@ -4,13 +4,29 @@
 let Post = Backbone.Model.extend()
 let Posts = Backbone.Collection.extend({
   model: Post,
-  url: '/posts'
+  url: '/api/posts'
 })
 let posts = new Posts()
+
+let SinglePostView = Backbone.View.extend({
+  el: '#app',
+  tagName: 'div',
+  template: _.template($('#singlePostTemplate').html()),
+  render () {
+    this.$el.html(this.template(this.model.attributes))
+    return this
+  }
+})
 
 let PostView = Backbone.View.extend({
   tagName: 'li',
   className: 'post',
+  events: {
+    'click': 'onClick'
+  },
+  onClick () {
+    router.navigate('posts/' + this.model.get('id'), { trigger: true })
+  },
   template: _.template($('#postsTemplate').html()),
   render () {
     this.$el.html(this.template(this.model.attributes))
@@ -20,20 +36,11 @@ let PostView = Backbone.View.extend({
 
 let PostsView = Backbone.View.extend({
   el: '#app',
-  initialize (options) {
-    if(options.id !== undefined){
-      console.log(options.id)
-      console.log('render single post')
-    } else {
-      console.log('render all posts')
-    }
-    console.log(this.model)
-  },
   render () {
     this.$el.html('')
     this.model.forEach( item => {
-      let postView = new PostView({ model: item })
-      this.$el.append(postView.render().$el)
+      let postView = new PostView({ model: item, router: this.router })
+      this.$el.prepend(postView.render().$el)
     })
     return this
   }

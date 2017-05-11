@@ -1,0 +1,15 @@
+<script id="singlePostTemplate" type="text/template">
+  <div class="panel panel-warning">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <%= title %>
+      </h2>
+    </div>
+    <div class="panel-body">
+      <%= text %>
+    </div>
+    <div class="panel-footer">
+      <%= moment(created_at).format('ddd.MMM.DD.YY') %>
+    </div>
+  </div>
+</script>

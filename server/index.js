@@ -17,7 +17,7 @@ app.use(express.static('public'))
 const usersRoutes = require('./routes/users')(express)
 const postsRoutes = require('./routes/posts')(express)
 app.use('/users', usersRoutes)
-app.use('/posts', postsRoutes)
+app.use('/api/posts', postsRoutes)
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../', 'public', 'index.html'))

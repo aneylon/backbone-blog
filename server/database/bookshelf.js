@@ -8,7 +8,7 @@ let knex = require('knex')({
     // user: 'admin',
     // password: 'password',
     charset: 'utf8',
-    database: 'backboneblog1',
+    database: 'backboneblog',
     filename: path.join(__dirname, './store/backboneblog1.sqlite')
   }
 })

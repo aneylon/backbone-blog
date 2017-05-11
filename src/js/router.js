@@ -22,24 +22,32 @@ const Router = Backbone.Router.extend({
     view.render()
   },
   viewPosts (id) {
-    console.log('new view')
-    posts.fetch({
-      success(){
-        console.log('posts fetch success')
-        let view = new PostsView({ model: posts })
-        view.render()
-      },
-      fail(){
-        console.log('posts fetch fail')
-        let view = new ErrorView()
-        view.render()
-      }
-    })
+    if(id === null) {
+      posts.fetch({
+        success () {
+          let view = new PostsView({ model: posts, router: this })
+          view.render()
+        },
+        fail () {
+          let view = new ErrorView()
+          view.render()
+        }
+      })
+    } else {
+      console.log('showing post' + id)
+      $.get(
+        '/api/posts/'+id,
+        function(data, status) {
+          let singlePost = new Post(data)
+          let view = new SinglePostView({ model: singlePost })
+          view.render()
+        }
+      )
+    }
   }
 })
 let router = new Router()
 
-// Backbone.history.start()
 Backbone.history.start({ pushState: true })
 
 let NavView = Backbone.View.extend({

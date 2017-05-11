@@ -36,9 +36,11 @@ let AddPostView = Backbone.View.extend({
     let text = this.$('#addPostText').val()
     let token = localStorage.getItem('bbb-jwt')
     $.post(
-      '/posts',
+      '/api/posts',
       { title, text, token },
       function(data, status) {
+        console.log(data)
+        console.log(status)
       }
     )
   },
