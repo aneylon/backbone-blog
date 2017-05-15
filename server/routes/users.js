@@ -13,18 +13,22 @@ module.exports = function (express) {
   })
 
   router.post('/signup', (req, res) => {
-    const { username, password } = req.body
+    const { username, password, code } = req.body
 
     new User({ username })
       .fetch()
       .then( user => {
         if(!user) {
-          let newUser = new User({ username, password })
-          newUser.save()
+          if(code === process.env.CODE) {
+            let newUser = new User({ username, password })
+            newUser.save()
             .then( user => {
               Users.add(user)
               res.send({ success: true, message: 'Added new user', user })
             })
+          } else {
+            res.send({ success: false, message: 'Incorrect signup code' })
+          }
         } else {
           res.send({ success: false, message: 'User exists' })
         }

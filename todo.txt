@@ -1,5 +1,7 @@
-handle single post
-posts in reverse order
+x handle single post
+x posts in reverse order
+
+shorter post preview
 error messages
 token timeout error
 code for new user

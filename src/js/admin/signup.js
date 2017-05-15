@@ -9,12 +9,27 @@ let SignupView = Backbone.View.extend({
   },
   onSubmit (e) {
     e.preventDefault()
+    $('#signupError').text('')
+
     let username = $('#signupUsername').val()
     let password = $('#signupPassword').val()
+    let code = $('#signupCode').val()
+
     $.post(
       '/users/signup',
-      { username, password },
+      { username, password, code },
       function(data, status) {
+        console.log(data)
+        if(data.success){
+          $('#signupUsername').val('')
+          $('#signupPassword').val('')
+          $('#signupCode').val('')
+
+          $(this).slideToggle()
+        } else {
+          
+          $('#signupError').text(data.message)
+        }
       }
     )
   },

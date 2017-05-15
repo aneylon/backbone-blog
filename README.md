@@ -18,8 +18,9 @@ Run `npm i` to install dependencies
 
 Include a `.env` file in the root of the app with the following settings.
 ```
-PORT = 8080 # Whatever port you need
-SECRET = someSecret # For creating JWTs
+PORT = 8080 # Whatever port you need.
+SECRET = someSecret # For creating JWTs.
+CODE = SomeString # For signing up new users.
 ```
 Run `nodemon` to start the sever.
 Run `gulp` to execute all built and lint tasks and start Browser Sync.
