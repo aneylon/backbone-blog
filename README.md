@@ -4,13 +4,12 @@ Simple Full Stack JavaScript blogging app featuring:
  - [Backbone](http://backbonejs.org/)
    - [Underscore](http://underscorejs.org/)
    - [jQuery](http://jquery.com/)
- - [Express](http://expressjs.com/)
+ - [Node](https://nodejs.org)
+   - [Express](http://expressjs.com/)
  - [Bookshelf](http://bookshelfjs.org)
    - [Knex](http://knexjs.org/)
    - [Sqlite](https://github.com/kriasoft/node-sqlite)
  - [Bootstrap](http://getbootstrap.com/)
-
-Live Example : My-Backbone-Blog
 
 ## Setup
 ### Local
@@ -23,7 +22,10 @@ SECRET = someSecret # For creating JWTs.
 CODE = SomeString # For signing up new users.
 ```
 Run `nodemon` to start the sever.
+
 Run `gulp` to execute all built and lint tasks and start Browser Sync.
+
+Alternatively you can run the `css`, `html` and `js` tasks separately if you don't want Browser Sync to be running for live development
 
 ### Deployment
 Configure environment variables as mentioned above.
