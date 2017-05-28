@@ -1,5 +1,7 @@
 /* global
   Backbone
+  _
+  $
 */
 let SignoutView = Backbone.View.extend({
   eventBus,
@@ -8,7 +10,7 @@ let SignoutView = Backbone.View.extend({
     'submit': 'onSubmit'
   },
   initialize (options) {
-    if(options.signedIn){
+    if (options.signedIn) {
       this.loggedIn()
     } else {
       this.loggedOut()

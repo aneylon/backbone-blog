@@ -1,5 +1,7 @@
 /* global
   Backbone
+  _
+  $
 */
 const Router = Backbone.Router.extend({
   routes: {
@@ -22,7 +24,7 @@ const Router = Backbone.Router.extend({
     view.render()
   },
   viewPosts (id) {
-    if(id === null) {
+    if (id === null) {
       posts.fetch({
         success () {
           let view = new PostsView({ model: posts, router: this })
@@ -36,8 +38,8 @@ const Router = Backbone.Router.extend({
     } else {
       console.log('showing post' + id)
       $.get(
-        '/api/posts/'+id,
-        function(data, status) {
+        '/api/posts/' + id,
+        function (data, status) {
           let singlePost = new Post(data)
           let view = new SinglePostView({ model: singlePost })
           view.render()

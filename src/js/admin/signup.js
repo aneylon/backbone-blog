@@ -1,5 +1,7 @@
 /* global
   Backbone
+  _
+  $
 */
 let SignupView = Backbone.View.extend({
   eventBus,
@@ -18,16 +20,15 @@ let SignupView = Backbone.View.extend({
     $.post(
       '/users/signup',
       { username, password, code },
-      function(data, status) {
+      function (data, status) {
         console.log(data)
-        if(data.success){
+        if (data.success) {
           $('#signupUsername').val('')
           $('#signupPassword').val('')
           $('#signupCode').val('')
 
           $(this).slideToggle()
         } else {
-          
           $('#signupError').text(data.message)
         }
       }

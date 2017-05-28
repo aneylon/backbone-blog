@@ -1,5 +1,7 @@
 /* global
   Backbone
+  _
+  $
 */
 const Link = Backbone.Model.extend()
 const Links = Backbone.Collection.extend({
@@ -28,7 +30,7 @@ const LinksView = Backbone.View.extend({
   },
   render () {
     this.$el.html('')
-    this.model.forEach( link => {
+    this.model.forEach(link => {
       let newLink = new LinkView({ model: link })
       this.$el.append(newLink.render().$el)
     })

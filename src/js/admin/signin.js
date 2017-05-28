@@ -1,5 +1,7 @@
 /* global
   Backbone
+  _
+  $
 */
 let SigninView = Backbone.View.extend({
   eventBus,
@@ -8,7 +10,7 @@ let SigninView = Backbone.View.extend({
     'submit': 'onSubmit'
   },
   initialize (options) {
-    if(options.signedIn) {
+    if (options.signedIn) {
       this.loggedIn()
     } else {
       this.loggedOut()
@@ -38,8 +40,8 @@ let SigninView = Backbone.View.extend({
     $.post(
       '/users/signin',
       { username, password },
-      function(data, status) {
-        if(data.success) {
+      function (data, status) {
+        if (data.success) {
           localStorage.setItem('bbb-jwt', data.token)
           self.eventBus.trigger('loggedIn')
         }

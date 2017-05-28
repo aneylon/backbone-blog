@@ -1,14 +1,16 @@
 /* global
   Backbone
+  _
+  $
 */
 let AddPostView = Backbone.View.extend({
   eventBus,
   template: _.template($('#addPostsTemplate').html()),
-  events:{
+  events: {
     'submit': 'onSubmit'
   },
   initialize (options) {
-    if(options.signedIn) {
+    if (options.signedIn) {
       this.loggedIn()
     } else {
       this.loggedOut()
@@ -38,7 +40,7 @@ let AddPostView = Backbone.View.extend({
     $.post(
       '/api/posts',
       { title, text, token },
-      function(data, status) {
+      function (data, status) {
         console.log(data)
         console.log(status)
       }

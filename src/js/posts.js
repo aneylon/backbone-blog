@@ -1,5 +1,7 @@
 /* global
   Backbone
+  _
+  $
 */
 let Post = Backbone.Model.extend()
 let Posts = Backbone.Collection.extend({
@@ -38,7 +40,7 @@ let PostsView = Backbone.View.extend({
   el: '#app',
   render () {
     this.$el.html('')
-    this.model.forEach( item => {
+    this.model.forEach(item => {
       let postView = new PostView({ model: item, router: this.router })
       this.$el.prepend(postView.render().$el)
     })
