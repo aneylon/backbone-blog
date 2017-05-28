@@ -12,7 +12,7 @@ let SignupView = Backbone.View.extend({
   onSubmit (e) {
     e.preventDefault()
     $('#signupError').text('')
-
+    let self = this
     let username = $('#signupUsername').val()
     let password = $('#signupPassword').val()
     let code = $('#signupCode').val()
@@ -21,13 +21,11 @@ let SignupView = Backbone.View.extend({
       '/users/signup',
       { username, password, code },
       function (data, status) {
-        console.log(data)
         if (data.success) {
           $('#signupUsername').val('')
           $('#signupPassword').val('')
           $('#signupCode').val('')
-
-          $(this).slideToggle()
+          self.$el.find('form').slideToggle()
         } else {
           $('#signupError').text(data.message)
         }

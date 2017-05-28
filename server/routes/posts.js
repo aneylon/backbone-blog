@@ -32,7 +32,7 @@ module.exports = function (express) {
     newPost.save()
       .then(function(post) {
         Posts.add(post)
-        res.send({ message: 'added', newPost })
+        res.send({ success: true, message: 'added', newPost })
       })
   })
 

@@ -44,6 +44,8 @@ let SigninView = Backbone.View.extend({
         if (data.success) {
           localStorage.setItem('bbb-jwt', data.token)
           self.eventBus.trigger('loggedIn')
+        } else {
+          $('#signinError').text(data.message)
         }
       }
     )

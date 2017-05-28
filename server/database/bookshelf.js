@@ -5,11 +5,9 @@ let knex = require('knex')({
   client: 'sqlite',
   connection: {
     host: '127.0.0.1',
-    // user: 'admin',
-    // password: 'password',
     charset: 'utf8',
     database: 'backboneblog',
-    filename: path.join(__dirname, './store/backboneblog1.sqlite')
+    filename: path.join(__dirname, './store/backboneblog.sqlite')
   }
 })
 

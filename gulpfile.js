@@ -67,6 +67,7 @@ gulp.task('html', () => {
 gulp.task('lint', () => {
   return gulp.src([
     './src/**/*.js'
+    // './public/js/*.js'
   ])
     .pipe(plugins.standard())
     .pipe(plugins.standard.reporter('default', {

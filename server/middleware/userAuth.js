@@ -4,7 +4,7 @@ module.exports = function(req, res, next) {
   if(token){
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if(err){
-        res.send({ success: false, message: 'Bad token' })
+        res.send({ success: false, message: 'Bad token, try signing in again.' })
       } else {
         req.decoded = decoded
         next()

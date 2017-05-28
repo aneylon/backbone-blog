@@ -33,6 +33,7 @@ let AddPostView = Backbone.View.extend({
     this.render()
   },
   onSubmit (e) {
+    let self = this
     e.preventDefault()
     let title = this.$('#addPostTitle').val()
     let text = this.$('#addPostText').val()
@@ -41,8 +42,13 @@ let AddPostView = Backbone.View.extend({
       '/api/posts',
       { title, text, token },
       function (data, status) {
-        console.log(data)
-        console.log(status)
+        if (data.success) {
+          $('#addPostTitle').val('')
+          $('#addPostText').val('')
+          self.$el.find('form').slideToggle()
+        } else {
+          $('#addPostError').text(data.message)
+        }
       }
     )
   },

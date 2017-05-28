@@ -36,7 +36,6 @@ const Router = Backbone.Router.extend({
         }
       })
     } else {
-      console.log('showing post' + id)
       $.get(
         '/api/posts/' + id,
         function (data, status) {
