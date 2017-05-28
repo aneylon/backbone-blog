@@ -7,7 +7,9 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const port = process.env.PORT || 8080
 
-app.use(morgan('dev'))
+if(process.env.MODE === 'dev'){
+  app.use(morgan('dev'))
+}
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -21,7 +23,6 @@ app.use('/api/posts', postsRoutes)
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../', 'public', 'index.html'))
-  // res.redirect('/')
 })
 
 app.listen(port, () => {
