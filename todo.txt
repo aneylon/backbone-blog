@@ -1,11 +1,18 @@
+token timeout error
+? markdown v html
+~ code for new user
+
+Tests
+  Front End
+  Back End
+
+CI
+Deploy
+
 x handle single post
 x posts in reverse order
-
-shorter post preview
-error messages
-token timeout error
-~ code for new user
-? markdown v html
+x shorter post preview
+x error messages
 
 Server
   x Routes
@@ -19,13 +26,6 @@ Front End
   x Auth
   x UI
   ~ Responsive
-
-Tests
-  Front End
-  Back End
-
-CI
-Deploy
 
 x Tools
   x Gulp
